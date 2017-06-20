@@ -7,10 +7,10 @@ import model.ModelFacade;
 import view.ViewFacade;
 
 /**
- * <h1>The Class Main.</h1>
+ * La classe principale
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
+ * @author Dorian Thériez, Michaël Desteuque, Aaron Sebagh, Benjamin Henry
+ * @version 1.5
  */
 public abstract class Main {
 
