@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 import View.IBoulderDashView;
 import main.*;
 import Model.IBoulderDashModel;
