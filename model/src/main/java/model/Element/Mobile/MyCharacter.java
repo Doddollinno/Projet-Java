@@ -15,17 +15,7 @@ public abstract class MyCharacter extends Mobile {
 		// TODO - implement MyCharacter.MyCharacter
 		throw new UnsupportedOperationException();
 	}
-	
-	public void moveDown() {
-		// TODO - implement MyCharacter.moveDown
-		throw new UnsupportedOperationException();
-	}
-		
-	public void moveUp() {
-		// TODO - implement MyCharacter.moveUp
-		throw new UnsupportedOperationException();
-	}
-		
+
 	public void moveLeft() {
 		// TODO - implement MyCharacter.moveLeft
 		throw new UnsupportedOperationException();
