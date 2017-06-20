@@ -13,6 +13,7 @@ public abstract class Mobile extends Element implements IMap {
 
 	private Point position;
 	private Boolean Alive = true;
+	private IMap Map; 
 
 	/**
 	 * 
@@ -22,9 +23,9 @@ public abstract class Mobile extends Element implements IMap {
 	 */
 	public Mobile(Sprite sprite, IMap Map, Permeability permeability) {
 		super (sprite, permeability);
+		this.setMap(Map);
+        this.position = new Point();
 		
-		// TODO - implement Mobile.Mobile
-		throw new UnsupportedOperationException();
 	}
 
 	/**
