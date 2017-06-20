@@ -3,11 +3,6 @@ package controller;
 import java.awt.image.BufferedImage;
 import java.util.Observer;
 
-import nantel.java.boulder.models.PlayField;
-import nantel.java.boulder.models.entities.moovable.Exit;
-import nantel.java.boulder.models.entities.moovable.Rockford;
-import nantel.java.boulder.models.matrix.EntityMatrix2DArrayImpl;
-
 public class BoulderController{
 	
 	private BoulderDashModel level;
