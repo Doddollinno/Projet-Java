@@ -2,7 +2,7 @@ package model;
 
 import java.util.Observable;
 
-import model.Elements.IElement;
+import model.Element.IElement;
 
 public class Map {
 
