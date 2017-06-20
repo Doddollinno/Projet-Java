@@ -1,9 +1,10 @@
 package view;
 
-import Model.IMap;
-import Model.Element.Mobile.IMobile;
+import model.IMap;
+import model.Element.Mobile.IMobile;
 import main.*;
-import controller.
+import controller.UserOrder;
+
 
 public class BoulderDashView implements IBoulderDashView {
 
