@@ -4,6 +4,7 @@ import model.IMap;
 import model.Element.Mobile.IMobile;
 import main.*;
 import controller.UserOrder;
+import javax.swing.JOptionPane;
 
 
 public class BoulderDashView implements IBoulderDashView {
@@ -14,6 +15,7 @@ public class BoulderDashView implements IBoulderDashView {
 	private IMap Map;
 	private IMobile myCharacter;
 	private IOrderPerformer orderPerformer;
+	JOptionPane jop;
 
 	/**
 	 * 
@@ -27,10 +29,12 @@ public class BoulderDashView implements IBoulderDashView {
 
 	/**
 	 * 
-	 * @param message
+	 * @param Message s'affichant en cas d'erreur
 	 */
 	public void displayMessage(String message) {
-		// TODO - implement BoulderDashView.displayMessage
+		//Boîte de dialogue du message d'erreur
+		jop = new JOptionPane();
+		jop.showMessageDialog(null, "Error", "Erreur", JOptionPane.ERROR_MESSAGE);
 		throw new UnsupportedOperationException();
 	}
 
