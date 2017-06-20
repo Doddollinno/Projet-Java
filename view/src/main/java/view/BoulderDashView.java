@@ -1,5 +1,10 @@
 package view;
 
+import Model.IMap;
+import Model.Element.Mobile.IMobile;
+import main.*;
+import controller.
+
 public class BoulderDashView implements IBoulderDashView {
 
 	private int mapView = 10;
@@ -7,14 +12,14 @@ public class BoulderDashView implements IBoulderDashView {
 	private int view;
 	private IMap Map;
 	private IMobile myCharacter;
-	private IOrderPreformer orderPerformer;
+	private IOrderPerformer orderPerformer;
 
 	/**
 	 * 
-	 * @param road
+	 * @param map
 	 * @param myVehicle
 	 */
-	public BoulderDashView(IRoad road, IMobile myVehicle) {
+	public BoulderDashView(IMap map, IMobile myVehicle) {
 		// TODO - implement BoulderDashView.BoulderDashView
 		throw new UnsupportedOperationException();
 	}
@@ -78,16 +83,16 @@ public class BoulderDashView implements IBoulderDashView {
 		throw new UnsupportedOperationException();
 	}
 
-	public IMap getMap() {
+	public void getMap() {
 		// TODO - implement BoulderDashView.getMap
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param road
+	 * @param Map
 	 */
-	public void setMap(IRoad road) {
+	public void setMap(IMap Map) {
 		// TODO - implement BoulderDashView.setMap
 		throw new UnsupportedOperationException();
 	}
@@ -98,11 +103,10 @@ public class BoulderDashView implements IBoulderDashView {
 
 	/**
 	 * 
-	 * @param myVehicle
+	 * @param myCharacter
 	 */
-	public void setMyVehicle(IMobile myVehicle) {
-		// TODO - implement BoulderDashView.setMyVehicle
-		throw new UnsupportedOperationException();
+	public void setMyCharacter(IMobile myCharacter) {
+		this.myCharacter = myCharacter;
 	}
 
 	public int getView() {
@@ -132,8 +136,7 @@ public class BoulderDashView implements IBoulderDashView {
 	}
 
 	private IOrderPerformer getOrderPerformer() {
-		// TODO - implement BoulderDashView.getOrderPerformer
-		throw new UnsupportedOperationException();
+		return this.orderPerformer;
 	}
 
 	/**
@@ -149,7 +152,7 @@ public class BoulderDashView implements IBoulderDashView {
 	 * 
 	 * @param message
 	 */
-	public void displayMessage(string message) {
+	public void displayMessage(String message) {
 		// TODO - implement BoulderDashView.displayMessage
 		throw new UnsupportedOperationException();
 	}
@@ -159,4 +162,4 @@ public class BoulderDashView implements IBoulderDashView {
 		throw new UnsupportedOperationException();
 	}
 
-
+}
