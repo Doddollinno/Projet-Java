@@ -2,64 +2,56 @@ package model.Element.Mobile;
 
 import java.awt.Point;
 
-public interface IMobile {
+public class IMobile {
 
-	/**
-	 * Move up.
-	 */
-	void moveUp();
+	public void moveUp() {
+		// TODO - implement IMobile.moveUp
+		throw new UnsupportedOperationException();
+	}
 
-	/** 
-	 * Move Left.
-	 */
-	void moveLeft();
+	public void moveLeft() {
+		// TODO - implement IMobile.moveLeft
+		throw new UnsupportedOperationException();
+	}
 
-	/**
-	 * Move Down
-	 */
-	void moveDown();
+	public void moveDown() {
+		// TODO - implement IMobile.moveDown
+		throw new UnsupportedOperationException();
+	}
 
-	/**
-	 * Move Right
-	 */
-	void moveRight();
+	public void moveRight() {
+		// TODO - implement IMobile.moveRight
+		throw new UnsupportedOperationException();
+	}
 
-	/**
-	 * Do nothing
-	 */
-	void doNothing();
+	public void doNothing() {
+		// TODO - implement IMobile.doNothing
+		throw new UnsupportedOperationException();
+	}
 
-	/**
-	 * Gets the y.
-	 *
-	 * @return the y
-	 */
-	int getY();
+	public int getX() {
+		// TODO - implement IMobile.getX
+		throw new UnsupportedOperationException();
+	}
 
-	/**
-	 * Gets the x.
-	 *
-	 * @return the x
-	 */
-	int getX(); 
+	public int getY() {
+		// TODO - implement IMobile.getY
+		throw new UnsupportedOperationException();
+	}
 
-	/**
-	 * Checks if he is alive.
-	 *
-	 * @return the alive
-	 */
-	Boolean isAlive(); 
+	public Boolean isAlive() {
+		// TODO - implement IMobile.isAlive
+		throw new UnsupportedOperationException();
+	}
 
-	/**
-	 * Checks if he is dead.
-	 *
-	 * @return the dead
-	 */
-	Boolean Die();
+	public Boolean isCrashed() {
+		// TODO - implement IMobile.isCrashed
+		throw new UnsupportedOperationException();
+	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see fr.exia.showboard.IPawn#getPosition()
-	 */
-	Point getPosition(); 
+	public Point getPosition() {
+		// TODO - implement IMobile.getPosition
+		throw new UnsupportedOperationException();
+	}
+
 }
