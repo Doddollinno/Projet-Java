@@ -15,17 +15,21 @@ public abstract class Mobile extends Element implements IMap {
 	private Boolean Alive = true;
 	private IMap Map; 
 
-	/**
+	/** 
+	 * Instantiates a new mobile
 	 * 
 	 * @param sprite
+	 * 				the sprite
 	 * @param Map
+	 * 				the Map
 	 * @param permeability
+	 * 				the permeability
 	 */
 	public Mobile(Sprite sprite, IMap Map, Permeability permeability) {
 		super (sprite, permeability);
-		this.setMap(Map);
-        this.position = new Point();
-		
+		this.Map = Map;
+		this.position = new Point();
+
 	}
 
 	/**
@@ -36,77 +40,76 @@ public abstract class Mobile extends Element implements IMap {
 	 * @param Map
 	 * @param permeability
 	 */
-	public Mobile(int x, int y, Sprite sprite, IMap Map, Permeability permeability) {
+	public Mobile(final int x, final int y, final Sprite sprite, final IMap Map, final Permeability permeability) {
 		super (sprite, permeability);
-		// TODO - implement Mobile.Mobile
-		throw new UnsupportedOperationException();
+		this.setX(x);
+		this.setY(y);
 	}
 
 	public void moveUp() {
-		// TODO - implement Mobile.moveUp
-		throw new UnsupportedOperationException();
+		this.setY(this.getY() - 1);
+		this.setHasMoved();
 	}
 
 	public void moveLeft() {
-		// TODO - implement Mobile.moveLeft
-		throw new UnsupportedOperationException();
+		this.setX(this.getX() - 1);
+		this.setHasMoved();
 	}
 
 	public void moveRight() {
-		// TODO - implement Mobile.moveRight
-		throw new UnsupportedOperationException();
+		this.setX(this.getX() + 1);
+		this.setHasMoved();
 	}
 
 	public void moveDown() {
-		// TODO - implement Mobile.moveDown
-		throw new UnsupportedOperationException();
+		this.setY(this.getY() + 1);
+		this.setHasMoved();
 	}
 
 	public void doNothing() {
-		// TODO - implement Mobile.doNothing
-		throw new UnsupportedOperationException();
+		this.setHasMoved();
 	}
 
 	private void setHasMoved() {
-		// TODO - implement Mobile.setHasMoved
-		throw new UnsupportedOperationException();
+		this.getMap().setMobileHasChanged();
 	}
 
 	/**
 	 * 
 	 * @param x
 	 */
-	public void getX(int x) {
-		// TODO - implement Mobile.getX
-		throw new UnsupportedOperationException();
+	public final int getX() {
+		return this.getPosition().x;
 	}
 
 	/**
 	 * 
 	 * @param x
 	 */
-	public void setX(int x) {
-		// TODO - implement Mobile.setX
-		throw new UnsupportedOperationException();
+	public final void setX(final int x) {
+		this.getPosition().x = x;
+		if (this.IsDie()) {
+			this.die();
+		}
 	}
 
 	public int getY() {
-		// TODO - implement Mobile.getY
-		throw new UnsupportedOperationException();
+		return this.getPosition().y;
 	}
 
 	/**
 	 * 
 	 * @param y
 	 */
-	public void setY(int y) {
-		// TODO - implement Mobile.setY
-		throw new UnsupportedOperationException();
+	public final void setY(final int y) {
+		this.getPosition().y = (y + this.getMap().getHeight()) % this.getMap().getHeight();
+		if (this.IsDie()) {
+			this.die();
+		}
 	}
 
 	public IMap getMap() {
-		// TODO - implement Mobile.getMap
-		throw new UnsupportedOperationException();
+		return this.Map;
 	}
 
 	/**
@@ -114,34 +117,30 @@ public abstract class Mobile extends Element implements IMap {
 	 * @param map
 	 */
 	private void setMap(IMap map) {
-		// TODO - implement Mobile.setMap
-		throw new UnsupportedOperationException();
+		this.Map = map;
 	}
 
 	public Boolean isAlive() {
-		// TODO - implement Mobile.isAlive
-		throw new UnsupportedOperationException();
+		return this.Alive;
 	}
 
 	protected void die() {
-		// TODO - implement Mobile.die
-		throw new UnsupportedOperationException();
+		this.Alive = false;
+		this.setHasMoved();
 	}
 
-	public Boolean isCrashed() {
-		// TODO - implement Mobile.isCrashed
-		throw new UnsupportedOperationException();
-	}
+		public Point getPosition() {
+			return this.position;
+		}
 
-	public Point getPosition() {
-		return this.position;
-	}
-
-	/**
-	 * 
-	 * @param position
-	 */
-	public void setPosition(Point position) {
-		this.position = position;
-	}
+		public Boolean IsDie() {
+			return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
+		}
+		/**
+		 * 
+		 * @param position
+		 */
+		public void setPosition(Point position) {
+			this.position = position;
+		}
 }

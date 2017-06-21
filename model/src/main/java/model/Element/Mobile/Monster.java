@@ -6,8 +6,8 @@ import model.Element.Permeability;
 public abstract class Monster extends Mobile {
 
 	public Monster(int x, int y, model.Element.Sprite sprite, IMap Map, Permeability permeability) {
-		super(x, y, sprite, Map, permeability);
-		// TODO Auto-generated constructor stub
+		super(x, y, sprite, Map, permeability.BLOCKING);
+		
 	}
 
 	/**
@@ -16,24 +16,31 @@ public abstract class Monster extends Mobile {
 	 * @param y
 	 * @param Map
 	 */
-	public void Monster1(int x, int y, IMap Map) {
-		// TODO - implement Monster.Monster1
-		throw new UnsupportedOperationException();
+	public Monster1( int x,  int y, model.Element.Sprite sprite,  IMap Map, Permeability permeability) {
+		super(x, y, sprite, Map, permeability.BLOCKING);
+		spriteMonster1.loadImage();
+		
 	}
 
 	public void Movepatern() {
-		// TODO - implement Monster.Movepatern
-		throw new UnsupportedOperationException();
+		super.moveRight();
+		this.setSprite(SpriteMonster1);
+		super.moveDown();
+		this.setSprite(SpriteMonster1);
+		super.moveLeft();
+		this.setSprite(SpriteMonster1);
+		super.moveUp();
+		this.setSprite(SpriteMonster1);
 	}
 
 	protected void die() {
-		// TODO - implement Monster.die
-		throw new UnsupportedOperationException();
+		super.die();
+        this.setSprite(spriteExplode);
 	}
 
 	public void doNothing() {
-		// TODO - implement Monster.doNothing
-		throw new UnsupportedOperationException();
+		super.doNothing();
+        this.setSprite(sprite);
 	}
 
 }
