@@ -4,7 +4,7 @@ import model.Element.Element;
 import model.Element.Permeability;
 import model.Element.Sprite;
 
-public class MotionlessElement extends Element {
+public abstract class MotionlessElement extends Element {
 
 	 /**
      * Instantiates a new motionless element.

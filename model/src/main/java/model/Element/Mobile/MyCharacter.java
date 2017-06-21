@@ -1,5 +1,7 @@
 package model.Element.Mobile;
 
+import java.io.IOException;
+
 import model.IMap;
 import model.Element.Permeability;
 
@@ -11,14 +13,17 @@ public abstract class MyCharacter extends Mobile {
 	 * @param y
 	 * @param Map
 	 */
-	public MyCharacter(final int x, final int y, final IMap Map) {
+	
+	private int Diamonds;
+	public MyCharacter(final int x, final int y, final IMap Map)   {
 		super(x, Map, y, sprite, Permeability.BLOCKING);
 		spriteTurnLeft.loadImage();
         spriteTurnRight.loadImage();
         spriteTurnDown.loadImage();
         spriteTurnUp.loadImage();
-        spriteExplode.loadImage();
+        spriteDeath.loadImage();
         
+        this.Diamonds = 0;
 	}
 	
 	public void moveDown() {
@@ -43,7 +48,7 @@ public abstract class MyCharacter extends Mobile {
 
 	protected void die() {
 		super.die();
-        this.setSprite(spriteExplode);
+        this.setSprite(spriteDeath);
 	}
 
 	public void doNothing() {

@@ -9,7 +9,7 @@ import model.Element.Permeability;
 import model.Element.Sprite;
 import model.Element.Mobile.IMobile.*;
 
-public abstract class Mobile extends Element implements IMap {
+public abstract class Mobile extends Element implements IMobile {
 
 	private Point position;
 	private Boolean Alive = true;
@@ -27,7 +27,7 @@ public abstract class Mobile extends Element implements IMap {
 	 */
 	public Mobile(Sprite sprite, IMap Map, Permeability permeability) {
 		super (sprite, permeability);
-		this.Map = Map;
+		this.setMap(Map);
 		this.position = new Point();
 
 	}
@@ -88,10 +88,9 @@ public abstract class Mobile extends Element implements IMap {
 	 */
 	public final void setX(final int x) {
 		this.getPosition().x = x;
-		if (this.IsDie()) {
 			this.die();
 		}
-	}
+	
 
 	public int getY() {
 		return this.getPosition().y;
@@ -103,10 +102,9 @@ public abstract class Mobile extends Element implements IMap {
 	 */
 	public final void setY(final int y) {
 		this.getPosition().y = (y + this.getMap().getHeight()) % this.getMap().getHeight();
-		if (this.IsDie()) {
 			this.die();
 		}
-	}
+	
 
 	public IMap getMap() {
 		return this.Map;
@@ -133,9 +131,6 @@ public abstract class Mobile extends Element implements IMap {
 			return this.position;
 		}
 
-		public Boolean IsDie() {
-			return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
-		}
 		/**
 		 * 
 		 * @param position

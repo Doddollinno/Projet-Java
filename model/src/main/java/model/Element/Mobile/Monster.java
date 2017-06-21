@@ -16,21 +16,9 @@ public abstract class Monster extends Mobile {
 	 * @param y
 	 * @param Map
 	 */
-	public Monster1( int x,  int y, model.Element.Sprite sprite,  IMap Map, Permeability permeability) {
-		super(x, y, sprite, Map, permeability.BLOCKING);
-		spriteMonster1.loadImage();
-		
-	}
+
 
 	public void Movepatern() {
-		super.moveRight();
-		this.setSprite(SpriteMonster1);
-		super.moveDown();
-		this.setSprite(SpriteMonster1);
-		super.moveLeft();
-		this.setSprite(SpriteMonster1);
-		super.moveUp();
-		this.setSprite(SpriteMonster1);
 	}
 
 	protected void die() {
