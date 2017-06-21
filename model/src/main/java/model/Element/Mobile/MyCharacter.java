@@ -1,6 +1,7 @@
 package model.Element.Mobile;
 
 import model.IMap;
+import model.Element.Permeability;
 
 public abstract class MyCharacter extends Mobile {
 
@@ -10,40 +11,44 @@ public abstract class MyCharacter extends Mobile {
 	 * @param y
 	 * @param Map
 	 */
-	public MyCharacter(int x, int y, IMap Map) {
-		super(null, Map, null);
-		// TODO - implement MyCharacter.MyCharacter
-		throw new UnsupportedOperationException();
+	public MyCharacter(final int x, final int y, final IMap Map) {
+		super(x, Map, y, sprite, Permeability.BLOCKING);
+		spriteTurnLeft.loadImage();
+        spriteTurnRight.loadImage();
+        spriteTurnDown.loadImage();
+        spriteTurnUp.loadImage();
+        spriteExplode.loadImage();
+        
 	}
 	
 	public void moveDown() {
-		// TODO - implement MyCharacter.moveDown
-		throw new UnsupportedOperationException();
+		super.moveDown();
+		this.setSprite(spriteTurnDown);
 	}
 		
 	public void moveUp() {
-		// TODO - implement MyCharacter.moveUp
-		throw new UnsupportedOperationException();
+		super.moveUp();
+		this.setSprite(spriteTurnUp);
 	}
 		
 	public void moveLeft() {
-		// TODO - implement MyCharacter.moveLeft
-		throw new UnsupportedOperationException();
+		super.moveLeft();
+        this.setSprite(spriteTurnLeft);
 	}
 
 	public void moveRight() {
-		// TODO - implement MyCharacter.moveRight
-		throw new UnsupportedOperationException();
+		super.moveRight();
+        this.setSprite(spriteTurnRight);
 	}
 
 	protected void die() {
-		// TODO - implement MyCharacter.die
-		throw new UnsupportedOperationException();
+		super.die();
+        this.setSprite(spriteExplode);
 	}
 
 	public void doNothing() {
-		// TODO - implement MyCharacter.doNothing
-		throw new UnsupportedOperationException();
+		super.doNothing();
+        this.setSprite(sprite);
 	}
 
 
