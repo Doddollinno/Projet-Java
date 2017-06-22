@@ -19,7 +19,7 @@ public class BoulderDashView implements IBoulderDashView {
 	 * @param map
 	 * @param myVehicle
 	 */
-	public BoulderDashView(IMap map, IMobile myVehicle) {
+	public BoulderDashView(IMapx map, IMobile myVehicle) {
 		// TODO - implement BoulderDashView.BoulderDashView
 		throw new UnsupportedOperationException();
 	}
