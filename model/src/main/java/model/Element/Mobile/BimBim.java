@@ -14,7 +14,7 @@ public class BimBim extends Monster {
 	}
 	
 	public void Movepatern() {
-		while (Alive = true){
+		while (super.isAlive()){
 			super.moveLeft();
 			this.setSprite(BimBim);
 			super.moveDown();

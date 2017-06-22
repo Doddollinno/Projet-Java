@@ -14,7 +14,7 @@ import model.Element.Motionless.MotionlessElementFactory;
 public abstract class Mobile extends Element implements IMobile {
 
 	private Point position;
-	private Boolean Alive = true;
+	private	 Boolean Alive = true;
 	private IMap Map; 
 
 	/** 

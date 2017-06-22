@@ -16,6 +16,7 @@ public Diamond(Sprite sprite, IMap Map, Permeability permeability) {
 	super(sprite, Map, permeability);
 }
 
+
 @Override
 public Boolean IsDead() {
 	return null;

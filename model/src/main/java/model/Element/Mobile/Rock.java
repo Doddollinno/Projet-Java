@@ -11,7 +11,7 @@ public class Rock extends Mobile {
 	public Rock(int x, int y, Sprite sprite, IMap Map, Permeability permeability) {
 		super(x, y, sprite, Map, permeability);
 		
-			super.moveDown();
+			
 		}
 	}
 
