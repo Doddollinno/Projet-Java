@@ -10,7 +10,7 @@ import model.Element.Permeability;
 import model.Element.Sprite;
 import model.Element.Mobile.IMobile.*;
 import model.Element.Motionless.MotionlessElementFactory;
-
+import model.Element.Mobile.Monster;
 public abstract class Mobile extends Element implements IMobile {
 
 	private Point position;
@@ -48,6 +48,17 @@ public abstract class Mobile extends Element implements IMobile {
 		this.setY(y);
 	}
 
+	public void Moovement (){
+		while (Alive = true){
+			this.MovePatern;
+			
+		}
+	}
+	
+	public void Movepatern() {
+		
+	}
+	
 	public void moveUp() {
 		this.setY(this.getY() - 1);
 		this.setHasMoved();
@@ -150,4 +161,5 @@ public abstract class Mobile extends Element implements IMobile {
 				e.printStackTrace();
 			}
 		}
+		
 }

@@ -12,15 +12,15 @@ public class BuzzBuzz extends Monster {
 	}
 	
 	public void Movepatern() {
-		while (Alive = true){
-			super.moveRight();
-			this.setSprite(BuzzBuzz);
-			super.moveDown();
-			this.setSprite(BuzzBuzz);
-			super.moveLeft();
-			this.setSprite(BuzzBuzz);
-			super.moveUp();
-		}
+		
+		super.moveRight();
+		this.setSprite(BuzzBuzz);
+		super.moveDown();
+		this.setSprite(BuzzBuzz);
+		super.moveLeft();
+		this.setSprite(BuzzBuzz);
+		super.moveUp();
+		
 	}
 
 	protected void die() {
