@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.image.BufferedImage;
 import java.util.Observer;
+import model.BoulderDashModel;
 
 public class BoulderController{
 	
