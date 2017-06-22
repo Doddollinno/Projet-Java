@@ -4,16 +4,18 @@ import model.Element.Element;
 import model.Element.Permeability;
 import model.Element.Sprite;
 
-public class MotionlessElement extends Element {
+public abstract class MotionlessElement extends Element {
 
-	/**
-	 * 
-	 * @param sprite
-	 * @param permeability
-	 */
-	private MotionlessElement(Sprite sprite, Permeability permeability) {
+	 /**
+     * Instantiates a new motionless element.
+     *
+     * @param sprite
+     *            the sprite
+     * @param permeability
+     *            the permeability
+     */
+	MotionlessElement(final Sprite sprite, final Permeability permeability) {
 		super(sprite, permeability);
-		// TODO - implement MotionlessElement.MotionlessElement
-		throw new UnsupportedOperationException();
+	
 	}
 }

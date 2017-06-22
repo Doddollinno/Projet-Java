@@ -8,7 +8,7 @@ public interface IElement {
 
 	Permeability getPermeability();
 
-	 Image getImage();
+	Image getImage();
 
 
 

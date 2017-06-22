@@ -2,24 +2,16 @@ package model.Element.Mobile;
 
 import model.IMap;
 import model.Element.Permeability;
+import model.Element.Sprite;
 
-public abstract class Monster extends Mobile {
+public class GuriGuri extends Monster{
 
-	public Monster(int x, int y, model.Element.Sprite sprite, IMap Map, Permeability permeability) {
-		super(x, y, sprite, Map, permeability.BLOCKING);
-		
+	public GuriGuri(int x, int y, Sprite sprite, IMap Map, Permeability permeability) {
+		super(x, y, sprite, Map, permeability);
+		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param Map
-	 */
-
-
+	
 	public void Movepatern() {
-		
 	}
 
 	protected void die() {
@@ -31,5 +23,4 @@ public abstract class Monster extends Mobile {
 		super.doNothing();
         this.setSprite(sprite);
 	}
-
 }

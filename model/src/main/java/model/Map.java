@@ -1,31 +1,30 @@
 package model;
 
+import java.io.IOException;
 import java.util.Observable;
 
-import model.Elements.IElement;
+import model.Element.IElement;
 
 public class Map {
-
+	
+	/** The width. */
 	private int width;
+	
+	/** The height. */
 	private int height;
+	
+	private IElement[][] onTheMap;
 
-	/**
-	 * 
-	 * @param fileName
-	 */
-	Map(String fileName) {
-		// TODO - implement Map.Map
-		throw new UnsupportedOperationException();
-	}
+	 /**
+     * Instantiates a new road with the content of the file fileName.
+     *
+     * @param fileName
+     *            the file name where the map of the road is
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
 
-	/**
-	 * 
-	 * @param fileName
-	 */
-	private void loadFile(String fileName) {
-		// TODO - implement Map.loadFile
-		throw new UnsupportedOperationException();
-	}
+	
 
 	public int getWidth() {
 		return this.width;
@@ -56,28 +55,25 @@ public class Map {
 	 * @param x
 	 * @param y
 	 */
-	public IElement getOnTheMapWY(int x, int y) {
-		// TODO - implement Map.getOnTheMapWY
-		throw new UnsupportedOperationException();
+	public IElement getOnTheMapXY(int x, int y) {
+		return this.onTheMap[x][y];
 	}
 
 	/**
 	 * 
 	 * @param element
 	 */
-	private void setOnTheMapXY(IElement element) {
-		// TODO - implement Map.setOnTheMapXY
-		throw new UnsupportedOperationException();
+	private void setOnTheMapXY(IElement element, final int x, final int y) {
+		this.onTheMap[x][y] = element;
 	}
 
 	public void setMobilehasChanged() {
-		// TODO - implement Map.setMobilehasChanged
-		throw new UnsupportedOperationException();
+		   this.setChanged();
+	       this.notifyObservers();
 	}
 
 	public Observable getObservable() {
-		// TODO - implement Map.getObservable
-		throw new UnsupportedOperationException();
+		return this;
 	}
 
 }
