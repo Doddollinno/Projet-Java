@@ -17,7 +17,7 @@ public Diamond(Sprite sprite, IMap Map, Permeability permeability) {
 }
 
 @Override
-public Boolean IsDie() {
+public Boolean IsDead() {
 	return null;
 	
 }

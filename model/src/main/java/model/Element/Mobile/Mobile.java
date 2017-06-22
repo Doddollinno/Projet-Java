@@ -1,6 +1,7 @@
 package model.Element.Mobile;
 
 import java.awt.Point;
+import java.io.IOException;
 
 import model.IMap;
 import model.Element.Element;
@@ -8,6 +9,7 @@ import model.Element.IElement;
 import model.Element.Permeability;
 import model.Element.Sprite;
 import model.Element.Mobile.IMobile.*;
+import model.Element.Motionless.MotionlessElementFactory;
 
 public abstract class Mobile extends Element implements IMobile {
 
@@ -137,5 +139,15 @@ public abstract class Mobile extends Element implements IMobile {
 		 */
 		public void setPosition(Point position) {
 			this.position = position;
+		}
+		
+		public void digDirt() {
+			this.getMap().setOnTheMapXY(this.getX(), this.getY(), MotionlessElementFactory.createDugDirt());
+			try {
+				this.getMap().getOnTheMapXY(getX(), getY()).getSprite().loadImage();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 }

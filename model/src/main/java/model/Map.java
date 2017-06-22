@@ -23,19 +23,8 @@ public class Map {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-	Map(String fileName) throws IOException {
-        super();
-        this.loadFile(fileName);
-	}
 
-	/**
-	 * 
-	 * @param fileName
-	 */
-	private void loadFile(String fileName) {
-		// TODO - implement Map.loadFile
-		throw new UnsupportedOperationException();
-	}
+	
 
 	public int getWidth() {
 		return this.width;

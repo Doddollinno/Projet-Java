@@ -55,7 +55,7 @@ public interface IMobile {
 	 *
 	 * @return the dead
 	 */
-	Boolean IsDie();
+	Boolean IsDead();
 
 	/*
 	 * (non-Javadoc)
