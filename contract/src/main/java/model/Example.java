@@ -1,7 +1,7 @@
 package model;
 
 
- */
+ 
 public class Example {
 
     /** The id. */

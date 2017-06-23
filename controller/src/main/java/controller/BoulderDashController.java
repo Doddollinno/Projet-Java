@@ -15,7 +15,6 @@ import java.io.IOException;
  * @see IOrderPerformer
  */
 
->>>>>>> refs/remotes/origin/Loadren
 public abstract class BoulderDashController implements IBoulderDashController, IOrderPerformer {
 
 	/** The Constant speed. */
