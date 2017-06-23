@@ -24,6 +24,7 @@ public class Map {
 	/** The elements */
 	private IElement[][] onTheMap;
 	
+	/** The Pawn list */
 	private ArrayList<IMobile> pawns;
 
 	 /**

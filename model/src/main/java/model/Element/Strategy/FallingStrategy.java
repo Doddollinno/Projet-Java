@@ -1,6 +1,7 @@
 package model.Element.Strategy;
 
 import controller.IStrategy;
+
 import controller.UserOrder;
 import model.IMap;
 import model.IMobile;

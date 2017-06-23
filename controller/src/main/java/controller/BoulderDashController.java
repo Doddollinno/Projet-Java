@@ -1,5 +1,5 @@
 package controller;
-import View.IBoulderDashView;
+import contract.IBoulderDashView;
 import main.*;
 import Model.IBoulderDashModel;
 public abstract class BoulderDashController implements IBoulderDashController, IOrderPerformer {

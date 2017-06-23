@@ -15,7 +15,7 @@ public class BoulderController{
 	 */
 
 
-	public GameController(final BoulderDashModel level)
+	public void GameController(final BoulderDashModel level)
 	{
 		this.level = level;
 		

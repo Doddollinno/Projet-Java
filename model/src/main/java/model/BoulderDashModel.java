@@ -1,9 +1,13 @@
 import model.Element.Mobile.MyCharacter;
 
+import java.util.ArrayList;
+
+import model.Map;
+
 public abstract class BoulderDashModel implements IModel {
 
 	/** The map. */
-	private IMap map;
+	private Map map;
 
 	/** The player's character. */
 	private MyCharacter myCharacter;
@@ -27,7 +31,6 @@ public abstract class BoulderDashModel implements IModel {
 	 * 
 	 * @see model.IModel#getExampleById(int)
 	 */
-	@Override
 	public IMap getMap() {
 		return this.map;
 	}
