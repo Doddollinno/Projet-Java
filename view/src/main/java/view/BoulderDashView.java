@@ -31,7 +31,7 @@ public class BoulderDashView implements IBoulderDashView, Runnable, KeyListener 
 	/**
 	 * 
 	 * @param map
-	 * @param myVehicle
+	 * @param myCharacter
 	 */
 	public BoulderDashView(final IMap map, final IMobile MyCharacter) {
 		this.setView(mapView);
@@ -74,9 +74,11 @@ public class BoulderDashView implements IBoulderDashView, Runnable, KeyListener 
     }
 
 	/**
-	 * 
-	 * @param yStart
-	 */
+     * Prints the road and the player's vehicle in the console.
+     *
+     * @param yStart
+     *            the y start
+     */
 	public void show(int yStart) {
         int y = yStart % this.getMap().getHeight();
         for (int view = 0; view < this.getView(); view++) {
@@ -92,10 +94,13 @@ public class BoulderDashView implements IBoulderDashView, Runnable, KeyListener 
         }
     }
 
-	/**
-	 * 
-	 * @param keyCode
-	 */
+	 /**
+     * Key code to user order.
+     *
+     * @param keyCode
+     *            the key code
+     * @return the user order
+     */
 	public UserOrder keyCodeToUserOrder(int keyCode) {
 		 UserOrder userOrder;
 		    switch (keyCode) {
@@ -146,72 +151,107 @@ public class BoulderDashView implements IBoulderDashView, Runnable, KeyListener 
 	public void keyReleased(KeyEvent keyEvent) {
 		//Nop
 	}
-
+	
+	/**
+     * Gets the Map.
+     *
+     * @return the map
+     */
 	private IMap getMap() {
 		return this.map
 	}
 
-	/**
-	 * 
-	 * @param Map
-	 */
-	public void setMap(IMap Map) {
+    /**
+     * Sets the road.
+     *
+     * @param road
+     *            the new road
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+	public void setMap(IMap Map) throws IOException {
 		this.Map = Map;
-        for (int x = 0; x < this.getMap().getWidth(); x++) {
-            for (int y = 0; y < this.getMap().getHeight(); y++) {
-                this.getMap().getOnTheRoadXY(x, y).getSprite().loadImage();
+		for (int x = 0; x < this.getMap().getWidth(); x++) {
+			for (int y = 0; y < this.getMap().getHeight(); y++) {
+				this.getMap().getOnTheRoadXY(x, y).getSprite().loadImage();
+			}
+		}
 	}
 
 	public IMobile getMyCharacter() {
 		return this.myCharacter;
 	}
 
-	/**
-	 * 
-	 * @param myCharacter
-	 */
+    /**
+     * Gets my character.
+     *
+     * @return my character
+     */
 	public void setMyCharacter(IMobile myCharacter) {
 		this.myCharacter = myCharacter;
 	}
-
+	
+    /**
+     * Gets the view.
+     *
+     * @return the view
+     */
 	public int getView() {
 		return this.view;
 	}
 
-	/**
-	 * 
-	 * @param view
-	 */
+    /**
+     * Sets the view.
+     *
+     * @param view
+     *            the new view
+     */
 	private void setView(int view) {
 		this.view = view;
 	}
 
+    /**
+     * Gets the close view.
+     *
+     * @return the close view
+     */
 	private Rectangle getCloseView() {
 		return this.closeView;
 	}
 
-	/**
-	 * 
-	 * @param closeView
-	 */
+    /**
+     * Sets the close view.
+     *
+     * @param closeView
+     *            the new close view
+     */
 	private void setCloseView(Rectangle closeView) {
 		this.closeView = closeView;
 	}
 
+    /**
+     * Gets the order performer.
+     *
+     * @return the order performer
+     */
 	private IOrderPerformer getOrderPerformer() {
 		return this.orderPerformer;
 	}
 
-	/**
-	 * 
-	 * @param orderPerformer
-	 */
+    /**
+     * Sets the order performer.
+     *
+     * @param orderPerformer
+     *            the new order performer
+     */
 	public void setOrderPerformer(IOrderPerformer orderPerformer) {
 		this.orderPerformer = orderPerformer;
 	}
 
 	
-
+	/**
+	 * The View Follow MyCharacter
+	 */
 	public void followMyCharacter() {
 		
 		this.getCloseView().y = (int) (this.myCharacter.getY() - (this.getCloseView().getHeight() / 2));
