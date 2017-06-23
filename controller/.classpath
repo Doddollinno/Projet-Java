@@ -18,5 +18,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dod-t/OneDrive Entreprise/U.E 6 Java/Projet/Ressources/showboard.doc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dod-t/OneDrive Entreprise/U.E 6 Java/Projet/Ressources/showboard.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
