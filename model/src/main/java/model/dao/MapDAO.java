@@ -95,7 +95,7 @@ public abstract class MapDAO extends AbstractDAO {
 				// (boulder, diamond..)
 				if (c == 'O')
 					tempMap.addPawn(new Boulder(currentXToWrite, currentYToWrite, tempMap));
-				else if (c == 'V') {
+				else if (c == 'D') {
 					tempMap.addPawn(new Diamond(currentXToWrite, currentYToWrite, tempMap));
 					tempMap.addDiamondCount();
 				} else if (c == 'M') {
