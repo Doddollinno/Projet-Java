@@ -338,22 +338,5 @@ public abstract class Mobile extends Element implements IMobile
 			this.getMap().getPawns().remove(this);
 		}
 
-		
-		@Override
-		public UserOrder getLastWallTouched() {
-			// nop
-			return UserOrder.NOP;
-		}
-
-		/**
-		 * Must be overriden by monsters.
-		 * 
-		 * @param userOrder
-		 *            Where the touched wall is
-		 * 
-		 */
-		@Override
-		public void setLastWallTouched(final UserOrder userOrder) {
-			// nop
 		}
 	}
