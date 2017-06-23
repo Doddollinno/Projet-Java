@@ -1,46 +1,61 @@
-package model;
+import model.Element.Mobile.MyCharacter;
 
-import model.Element.Mobile.IMobile;
+public abstract class BoulderDashModel implements IModel {
 
-public class BoulderDashModel {
+	/** The map. */
+	private IMap map;
+
+	/** The player's character. */
+	private MyCharacter myCharacter;
 
 	/**
+	 * Instantiates a new model facade.
+	 * @return 
 	 * 
-	 * @param fileName
-	 * @param myCharacterStartX
-	 * @param myCharacterStartY
+	 * @throws SQLException
+	 * @throws IOException
 	 */
-	public BoulderDashModel(String fileName, int myCharacterStartX, int myCharacterStartY) {
-		// TODO - implement BoulderDashModel.BoulderDashModel
-		throw new UnsupportedOperationException();
+	public void ModelFacade(final int mapID) throws SQLException, IOException {
+		super();
+		Sprite.loadBuffers();
+		this.setMap(MapDAO.getMapById(mapID));
+		this.setMyCharacter(new MyCharacter(1, 1, this.getMap()));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.IModel#getExampleById(int)
+	 */
+	@Override
 	public IMap getMap() {
-		// TODO - implement BoulderDashModel.getMap
-		throw new UnsupportedOperationException();
+		return this.map;
+	}
+
+	public void setMap(final Map newMap) {
+		this.map = newMap;
+	}
+
+	private void setMyCharacter(final MyCharacter newChara) {
+		this.myCharacter = newChara;
 	}
 
 	/**
-	 * 
-	 * @param Map
+	 * Moves pawns (boulders, diamonds, ...).
+	 * Their movement is related to their strategy.
 	 */
-	private void setMap(IMap Map) {
-		// TODO - implement BoulderDashModel.setMap
-		throw new UnsupportedOperationException();
+	public void movePawns() {
+		ArrayList<IMobile> copyPawns = new ArrayList<>(this.getMap().getPawns());
+		
+		for (IMobile pawn : copyPawns) {
+			pawn.followMyStrategy();
+		}
+
+		if (this.getMyCharacter().isCrushed())
+			this.getMyCharacter().die();
 	}
 
-	public IMobile getMyCharacter() {
-		// TODO - implement BoulderDashModel.getMyCharacter
-		throw new UnsupportedOperationException();
+	@Override
+	public MyCharacter getMyCharacter() {
+		return this.myCharacter;
 	}
-
-	/**
-	 * 
-	 * @param myCharacter
-	 */
-	private void setMyCharacter(IMobile myCharacter) {
-		// TODO - implement BoulderDashModel.setMyCharacter
-		throw new UnsupportedOperationException();
-	}
-
-}

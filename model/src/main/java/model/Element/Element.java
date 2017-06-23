@@ -2,6 +2,8 @@ package model.Element;
 
 import java.awt.Image;
 
+import model.IElement;
+
 public class Element implements IElement {
 
 	private Sprite sprite;

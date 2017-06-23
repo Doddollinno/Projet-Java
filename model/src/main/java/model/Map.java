@@ -1,9 +1,17 @@
 package model;
 
 import java.io.IOException;
+
+import java.awt.Point;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
 
-import model.Element.IElement;
+import model.IElement;
+import model.IMap;
+import model.Element.Permeability;
+import java.util.Observable;
+import contract.model.IMobile;
 
 public class Map {
 	
@@ -67,7 +75,8 @@ public class Map {
 		this.onTheMap[x][y] = element;
 	}
 
-	public void setMobilehasChanged() {
+	public void setMobile
+	hasChanged() {
 		   this.setChanged();
 	       this.notifyObservers();
 	}
@@ -75,5 +84,16 @@ public class Map {
 	public Observable getObservable() {
 		return this;
 	}
-
+	
+	public ArrayList<IMobile> getPawns() 
+	{
+		return this.pawns;
+		
+	}
+	  public Permeability getSquareIsOccupiedXY(final int x, final int y) {
+		    Point point = new Point(x, y);
+		    for(IMobile pawn : this.getPawns()) {
+		      if (pawn.getPosition().equals(point))
+		        return pawn.getPermeability();
+		    }
 }
