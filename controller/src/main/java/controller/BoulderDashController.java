@@ -1,18 +1,50 @@
 package controller;
-import View.IBoulderDashView;
-import main.*;
-import Model.IBoulderDashModel;
+
+import java.io.IOException;
+
 public abstract class BoulderDashController implements IBoulderDashController, IOrderPerformer {
 
 	public int speed = 300;
 	private IBoulderDashModel model;
 	private IBoulderDashView view;
+	private UserOrder stackOrder;
 
-	public void play() {
-		// TODO - implement BoulderDashController.play
-		throw new UnsupportedOperationException();
-	}
+	@Override
+	public final void play() throws InterruptedException {
+        while (this.getModel().getMyCharacter().isAlive()) {
+            Thread.sleep(speed);
+            switch (this.getStackOrder()) {
+                case RIGHT:
+                    this.getModel().getMyCharacter().moveRight();
+                    break;
+                case LEFT:
+                    this.getModel().getMyCharacter().moveLeft();
+                    break;
+                case UP:
+                	this.getModel().getMyCharacter().moveUp();
+                	break;
+                case DOWN:
+                	this.getModel().getMyCharacter().moveDown();
+                	break;
+                case NOP:
+                default:
+                    this.getModel().getMyCharacter().doNothing();
+                    break;
+            }
+            this.clearStackOrder();
+            if (this.getModel().getMyCharacter().isAlive()) {
+                this.getModel().getMyCharacter().moveDown();
+            }
+            this.getView().followMyCharacter();
+        }
+        this.getView().displayMessage("YOU DIED.");
+    }
 
+	/**
+     * Gets the view.
+     *
+     * @return the view
+     */
 	private IBoulderDashView getView() {
 		return this.view;
 	}
@@ -26,13 +58,14 @@ public abstract class BoulderDashController implements IBoulderDashController, I
 	 * @param stackOrder
 	 */
 	private void getStackOrder(UserOrder stackOrder) {
-		// TODO - implement BoulderDashController.getStackOrder
-		throw new UnsupportedOperationException();
+		return this.stackOrder;
 	}
 
+	/**
+     * Clear stack order.
+     */
 	private void clearStackOrder() {
-		// TODO - implement BoulderDashController.clearStackOrder
-		throw new UnsupportedOperationException();
+		this.stackOrder = UserOrder.NOP;
 	}
 
 	/**
@@ -41,8 +74,9 @@ public abstract class BoulderDashController implements IBoulderDashController, I
 	 * @param model
 	 */
 	public BoulderDashController(IBoulderDashView view, IBoulderDashModel model) {
-		// TODO - implement BoulderDashController.BoulderDashController
-		throw new UnsupportedOperationException();
+		this.setView(view);
+        this.setModel(model);
+        this.clearStackOrder();
 	}
 
 	/**
@@ -62,17 +96,16 @@ public abstract class BoulderDashController implements IBoulderDashController, I
 	}
 
 	public IOrderPerformer getOrderPerformer() {
-		// TODO - implement BoulderDashController.getOrderPerformer
-		throw new UnsupportedOperationException();
+		return this;
 	}
 
 	/**
 	 * 
 	 * @param userOrder
 	 */
-	public void orderPerform(UserOrder userOrder) {
-		// TODO - implement BoulderDashController.orderPerform
-		throw new UnsupportedOperationException();
-	}
+	@Override
+    public final void orderPerform(final UserOrder userOrder) throws IOException {
+        this.setStackOrder(userOrder);
+    }
 
 }

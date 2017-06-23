@@ -1,8 +1,18 @@
 package controller;
+
 public enum UserOrder {
-	RIGHT,
-	LEFT,
-	NOP,
-	UP,
-	DOWN
+	/** The right. */
+    RIGHT,
+
+    /** The left. */
+    LEFT,
+
+    /** The up. */
+    UP,
+    
+    /** The down. */
+    DOWN,
+    
+    /** The nop. */
+    NOP
 }
