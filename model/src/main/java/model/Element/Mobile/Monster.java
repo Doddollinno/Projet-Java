@@ -19,7 +19,7 @@ public abstract class Monster extends Mobile {
 
 
 	public void Movepatern() {
-		
+		super();
 	}
 
 	protected void die() {

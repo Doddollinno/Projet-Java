@@ -2,11 +2,31 @@ package model.Element.Mobile;
 
 import java.io.IOException;
 
+import fr.exia.insanevehicles.model.element.Sprite;
 import model.IMap;
 import model.Element.Permeability;
 
 public abstract class MyCharacter extends Mobile {
 
+	/** The Constant SPRITE. */
+    private static final Sprite sprite          = new Sprite('H', "MyCharacter.png");
+
+    /** The Constant spriteTurnLeft. */
+    private static final Sprite spriteTurnLeft  = new Sprite('H', "MyCharacterLeft.png");
+
+    /** The Constant spriteTurnRight. */
+    private static final Sprite spriteTurnRight = new Sprite('H', "MyCharacterRight.png");
+    
+    /** The Constant spriteTurnLeft. */
+    private static final Sprite spriteTurnUp  = new Sprite('H', "MyCharacterUp.png");
+
+    /** The Constant spriteTurnRight. */
+    private static final Sprite spriteTurnDown = new Sprite('H', "MyCharacterDown.png");
+
+    /** The Constant spriteExplode. */
+    private static final Sprite spriteDeath   = new Sprite('H', "MyCharacterExplode.png");
+	
+	
 	/**
 	 * 
 	 * @param x

@@ -1,8 +1,8 @@
-package model.Element.Mobile;
+package model;
 
 import java.awt.Point;
 
-public interface IMobile {
+public interface IMobile extends IPawn, IElement {
 
 	/**
 	 * Move up.

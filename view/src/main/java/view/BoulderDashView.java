@@ -2,10 +2,24 @@ package view;
 
 import model.IMap;
 import model.Element.Mobile.IMobile;
+
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import controller.UserOrder;
+import fr.exia.showboard.BoardFrame;
+
+import javax.swing.JOptionPane;
 import main.*;
 import controller.
 
-public class BoulderDashView implements IBoulderDashView {
+public class BoulderDashView implements IBoulderDashView, Runnable, KeyListener {
 
 	private int mapView = 10;
 	private int squareSize = 50;
@@ -17,11 +31,15 @@ public class BoulderDashView implements IBoulderDashView {
 	/**
 	 * 
 	 * @param map
-	 * @param myVehicle
+	 * @param myCharacter
 	 */
-	public BoulderDashView(IMap map, IMobile myVehicle) {
-		// TODO - implement BoulderDashView.BoulderDashView
-		throw new UnsupportedOperationException();
+	public BoulderDashView(final IMap map, final IMobile MyCharacter) {
+		this.setView(mapView);
+        this.setMap(map);
+        this.setMyCharacter(MyCharacter);
+        this.getMyCharacter().getSprite().loadImage();
+        this.setCloseView(new Rectangle(0, this.getMyCharacter().getY(), this.getMap().getWidth(), MapView));
+        SwingUtilities.invokeLater(this);
 	}
 
 	/**
@@ -29,137 +47,227 @@ public class BoulderDashView implements IBoulderDashView {
 	 * @param message
 	 */
 	public void displayMessage(String message) {
-		// TODO - implement BoulderDashView.displayMessage
-		throw new UnsupportedOperationException();
+		JOptionPane.showMessageDialog(null, message);
 	}
 
 	public void run() {
-		// TODO - implement BoulderDashView.run
-		throw new UnsupportedOperationException();
-	}
+        final BoardFrame boardFrame = new BoardFrame("Close view");
+        boardFrame.setDimension(new Dimension(this.getMap().getWidth(), this.getMap().getHeight()));
+        boardFrame.setDisplayFrame(this.closeView);
+        boardFrame.setSize(this.closeView.width * squareSize, this.closeView.height * squareSize);
+        boardFrame.setHeightLooped(true);
+        boardFrame.addKeyListener(this);
+        boardFrame.setFocusable(true);
+        boardFrame.setFocusTraversalKeysEnabled(false);
+
+        for (int x = 0; x < this.getMap().getWidth(); x++) {
+            for (int y = 0; y < this.getMap().getHeight(); y++) {
+                boardFrame.addSquare(this.Map.getOnTheRoadXY(x, y), x, y);
+            }
+        }
+        boardFrame.addPawn(this.getMyCharacter());
+
+        this.getMap().getObservable().addObserver(boardFrame.getObserver());
+        this.followMyCharacter();
+
+        boardFrame.setVisible(true);
+    }
 
 	/**
-	 * 
-	 * @param yStart
-	 */
+     * Prints the road and the player's vehicle in the console.
+     *
+     * @param yStart
+     *            the y start
+     */
 	public void show(int yStart) {
-		// TODO - implement BoulderDashView.show
-		throw new UnsupportedOperationException();
-	}
+        int y = yStart % this.getMap().getHeight();
+        for (int view = 0; view < this.getView(); view++) {
+            for (int x = 0; x < this.getMap().getWidth(); x++) {
+                if ((x == this.getMyCharacter().getX()) && (y == yStart)) {
+                    System.out.print(this.getMyCharacter().getSprite().getConsoleImage());
+                } else {
+                    System.out.print(this.getMap().getOnTheRoadXY(x, y).getSprite().getConsoleImage());
+                }
+            }
+            y = (y + 1) % this.getMap().getHeight();
+            System.out.print("\n");
+        }
+    }
 
-	/**
-	 * 
-	 * @param keyCode
-	 */
+	 /**
+     * Key code to user order.
+     *
+     * @param keyCode
+     *            the key code
+     * @return the user order
+     */
 	public UserOrder keyCodeToUserOrder(int keyCode) {
-		// TODO - implement BoulderDashView.keyCodeToUserOrder
-		throw new UnsupportedOperationException();
-	}
+		 UserOrder userOrder;
+		    switch (keyCode) {
+		        case KeyEvent.VK_RIGHT:
+		            userOrder = UserOrder.RIGHT;
+		            break;
+		        case KeyEvent.VK_LEFT:
+		            userOrder = UserOrder.LEFT;
+		            break;
+		        case KeyEvent.VK_UP;
+		        	userOrder = UserOrder.UP;
+		        	break;
+		        case KeyEvent.VK_DOWN;
+		    		userOrder = UserOrder.DOWN;
+		    		break;
+		        default:
+		            userOrder = UserOrder.NOP;
+		            break;
+		    }
+		    return userOrder;
+		}
+			
 
 	/**
 	 * 
 	 * @param keyEvent
 	 */
 	public void keyTyped(KeyEvent keyEvent) {
-		// TODO - implement BoulderDashView.keyTyped
-		throw new UnsupportedOperationException();
+		//Nop
 	}
+	
+    
 
 	/**
 	 * 
 	 * @param keyEvent
 	 */
-	public void keyPressed(KeyEvent keyEvent) {
-		// TODO - implement BoulderDashView.keyPressed
-		throw new UnsupportedOperationException();
-	}
-
+	public void keyPressed(KeyEvent keyEvent) try {
+        this.getOrderPerformer().orderPerform(keyCodeToUserOrder(keyEvent.getKeyCode()));
+    } catch (final IOException exception) {
+        exception.printStackTrace();
+    }
+}
 	/**
 	 * 
 	 * @param keyEvent
 	 */
 	public void keyReleased(KeyEvent keyEvent) {
-		// TODO - implement BoulderDashView.keyReleased
-		throw new UnsupportedOperationException();
+		//Nop
 	}
-
-	public void getMap() {
-		// TODO - implement BoulderDashView.getMap
-		throw new UnsupportedOperationException();
-	}
-
+	
 	/**
-	 * 
-	 * @param Map
-	 */
-	public void setMap(IMap Map) {
-		// TODO - implement BoulderDashView.setMap
-		throw new UnsupportedOperationException();
+     * Gets the Map.
+     *
+     * @return the map
+     */
+	private IMap getMap() {
+		return this.map
+	}
+
+    /**
+     * Sets the road.
+     *
+     * @param road
+     *            the new road
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+	public void setMap(IMap Map) throws IOException {
+		this.Map = Map;
+		for (int x = 0; x < this.getMap().getWidth(); x++) {
+			for (int y = 0; y < this.getMap().getHeight(); y++) {
+				this.getMap().getOnTheRoadXY(x, y).getSprite().loadImage();
+			}
+		}
 	}
 
 	public IMobile getMyCharacter() {
 		return this.myCharacter;
 	}
 
-	/**
-	 * 
-	 * @param myCharacter
-	 */
+    /**
+     * Gets my character.
+     *
+     * @return my character
+     */
 	public void setMyCharacter(IMobile myCharacter) {
 		this.myCharacter = myCharacter;
 	}
-
+	
+    /**
+     * Gets the view.
+     *
+     * @return the view
+     */
 	public int getView() {
 		return this.view;
 	}
 
-	/**
-	 * 
-	 * @param view
-	 */
+    /**
+     * Sets the view.
+     *
+     * @param view
+     *            the new view
+     */
 	private void setView(int view) {
 		this.view = view;
 	}
 
+    /**
+     * Gets the close view.
+     *
+     * @return the close view
+     */
 	private Rectangle getCloseView() {
-		// TODO - implement BoulderDashView.getCloseView
-		throw new UnsupportedOperationException();
+		return this.closeView;
 	}
 
-	/**
-	 * 
-	 * @param closeView
-	 */
+    /**
+     * Sets the close view.
+     *
+     * @param closeView
+     *            the new close view
+     */
 	private void setCloseView(Rectangle closeView) {
-		// TODO - implement BoulderDashView.setCloseView
-		throw new UnsupportedOperationException();
+		this.closeView = closeView;
 	}
 
+    /**
+     * Gets the order performer.
+     *
+     * @return the order performer
+     */
 	private IOrderPerformer getOrderPerformer() {
 		return this.orderPerformer;
 	}
 
-	/**
-	 * 
-	 * @param orderPerformer
-	 */
+    /**
+     * Sets the order performer.
+     *
+     * @param orderPerformer
+     *            the new order performer
+     */
 	public void setOrderPerformer(IOrderPerformer orderPerformer) {
-		// TODO - implement BoulderDashView.setOrderPerformer
-		throw new UnsupportedOperationException();
+		this.orderPerformer = orderPerformer;
 	}
 
+	
 	/**
-	 * 
-	 * @param message
+	 * The View Follow MyCharacter
 	 */
-	public void displayMessage(String message) {
-		// TODO - implement BoulderDashView.displayMessage
-		throw new UnsupportedOperationException();
-	}
-
 	public void followMyCharacter() {
-		// TODO - implement BoulderDashView.followMyCharacter
-		throw new UnsupportedOperationException();
-	}
+		
+		this.getCloseView().y = (int) (this.myCharacter.getY() - (this.getCloseView().getHeight() / 2));
+		this.getCloseView().x = (int) (this.myCharacter.getX() - (this.getCloseView().getWidth() / 2));
 
-}
+		if (this.myCharacter.getY() < this.getCloseView().getHeight() / 2) {
+			this.getCloseView().y = 0;
+		} else if (this.myCharacter.getY() > (this.map.getHeight() - (this.getCloseView().getHeight() / 2))) {
+			this.getCloseView().y = (int) (this.map.getHeight() - this.getCloseView().getHeight());
+		}
+		if (this.myCharacter.getX() < this.getCloseView().getWidth() / 2) {
+			this.getCloseView().x = 0;
+		} else if (this.myCharacter.getX() > (this.map.getWidth() - (this.getCloseView().getWidth() / 2))) {
+			this.getCloseView().x = (int) (this.map.getWidth() - this.getCloseView().getWidth());
+		}
+	}
+        }
+
+	}
