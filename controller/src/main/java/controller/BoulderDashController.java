@@ -2,9 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-import fr.exia.insanevehicles.controller.IOrderPerformer;
-import fr.exia.insanevehicles.controller.UserOrder;
-
 /**
  * <h1>The Class BoulderDashController.</h1>
  *
