@@ -1,21 +1,48 @@
 package model.Element.Motionless;
 
-import model.Element.Element;
-import model.Element.Permeability;
-import model.Element.Sprite;
+import javax.lang.model.element.Element;
 
-public abstract class MotionlessElement extends Element {
 
-	 /**
-     * Instantiates a new motionless element.
-     *
-     * @param sprite
-     *            the sprite
-     * @param permeability
-     *            the permeability
-     */
-	MotionlessElement(final Sprite sprite, final Permeability permeability) {
-		super(sprite, permeability);
+
+import model.Element.Motionless.Wall;
+import model.Element.Motionless.Dirt;
+import model.Element.Motionless.DugDirt;
+
+public abstract class MotionlessElement {
 	
-	}
+
+	private static final Wall    wall 			= new Wall();
+	private static final Dirt    dirt			= new Dirt();
+	private static final DugDirt dugDirt 		= new DugDirt();
+
+
+	private static MotionlessElement[]       motionlessElements  = {
+	        wall,
+	        dirt,
+	        dugDirt};
+
+	   
+
+
+    public static MotionlessElement createDugDirt() {
+        return dugDirt;
+    }
+
+    public static MotionlessElement createDirt() {
+        return dirt;
+    }
+
+
+    public static MotionlessElement createWall() {
+        return wall;
+    }
+	public static MotionlessElement getFromFileSymbol(final char fileSymbol) {
+        for (final MotionlessElement motionlessElement : motionlessElements) {
+            if (motionlessElement.getSprite().getConsoleImage() == fileSymbol) {
+                return motionlessElement;
+			}
+		}
+		return dugDirt;
+	}		
+
 }

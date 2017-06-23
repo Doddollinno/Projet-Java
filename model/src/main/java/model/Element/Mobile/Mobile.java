@@ -1,106 +1,51 @@
 package model.Element.Mobile;
 
 import java.awt.Point;
+
 import java.io.IOException;
 
+import controller.UserOrder;
+import fr.exia.showboard.IBoard;
 import model.IElement;
 import model.IMap;
 import model.IMobile;
 import model.Element.Element;
 import model.Element.Permeability;
 import model.Element.Sprite;
-import model.Element.Motionless.MotionlessElementFactory;
+import model.Element.Motionless.MotionlessElement;
 import model.IMobile.*;
 import model.Element.Mobile.Monster;
+import model.IMap;
 
-public abstract class Mobile extends Element implements IMobile 
-	{
+
+
+public abstract class Mobile extends Element implements IMobile {
+
 
 		private Point position;
-		private	 Boolean Alive = true;
-		private IMap Map; 
 
-	}
-		/** 
-	 * Instantiates a new mobile
-	 * 
-	 * @param sprite
-	 * 				the sprite
-	 * @param Map
-	 * 				the Map
-	 * @param permeability
-	 * 				the permeability
-	 */
-	public Mobile(Sprite sprite, IMap Map, Permeability permeability) 
-	{
-		super (sprite, permeability);
-		this.setMap(Map);
-		this.position = new Point();
 
-	}
-
-	/**
-	 * <h1>The Mobile Class.</h1>
-	 *
-	 * @author Paul
-	 * @version 0.3
-	 */
-  public abstract class Mobile extends Element implements IMobile {
-
-		/** The x and y. */
-		private Point position;
-
-		/** The alive. */
 		private Boolean alive = true;
 
-		/** The map. */
+
 		private IMap map;
 
-		/** The board. */
+
 		private IBoard board;
 
-		/** The FallSpeed */
+
 		private boolean fallSpeed = false;
 
-		/**
-		 * Instantiates a new mobile.
-		 *
-		 * @param sprite
-		 *            the sprite
-		 * @param map
-		 *            the map
-		 * @param permeability
-		 *            the permeability
-		 */
+
 		Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
 			super(sprite, permeability);
 			this.map = map;
 			this.position = new Point();
 		}
 
-		/**
-		 * Instantiates a new mobile.
-		 *
-		 * @param x
-		 *            the x
-		 * @param y
-		 *            the y
-		 * @param sprite
-		 *            the sprite
-		 * @param map
-		 *            the map
-		 * @param permeability
-		 *            the permeability
-		 */
+
 		Mobile(final int x, final int y, final Sprite sprite, final IMap map, final Permeability permeability) {
 			this(sprite, map, permeability);
-			// Following code will not work: if (0, y) or (x, 0) is BLOCKING,
-			// The game will end instanty. We have to set the initial position
-			// without
-			// Checking for collisions
-			// this.setX(x);
-			// this.setY(y);
-
 			this.getPosition().x = x;
 			this.getPosition().y = y;
 		}
@@ -136,9 +81,7 @@ public abstract class Mobile extends Element implements IMobile
 			this.fallSpeed = false;
 		}
 
-		/**
-		 * Sets the has moved.
-		 */
+
 		private void setHasMoved() {
 			this.getMap().setMobileHasChanged();
 		}
@@ -155,17 +98,10 @@ public abstract class Mobile extends Element implements IMobile
 			}
 		}
 
-		/**
-		 * Places dug dirt on the mobile's location.
-		 */
-		public void digDirt() {
-			this.getMap().setOnTheMapXY(this.getX(), this.getY(), ElementFactory.createDugDirt());
-			try {
-				this.getMap().getOnTheMapXY(getX(), getY()).getSprite().loadImage();
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		public void dugDirt() throws IOException {
+			this.getMap().setOnTheMapXY(this.getX(), this.getY(), MotionlessElement.createDugDirt());
+			this.getMap().getOnTheMapXY(getX(), getY()).getSprite().loadImage();
 		}
 
 		@Override
@@ -180,11 +116,7 @@ public abstract class Mobile extends Element implements IMobile
 			}
 		}
 
-		/**
-		 * Gets the map.
-		 *
-		 * @return the map
-		 */
+
 		public IMap getMap() {
 			return this.map;
 		}
@@ -194,19 +126,13 @@ public abstract class Mobile extends Element implements IMobile
 			return this.alive;
 		}
 
-		/**
-		 * Dies.
-		 */
+
 		protected void die() {
 			this.alive = false;
 			this.setHasMoved();
 		}
 
-		/**
-		 * @return Whether the mobile is crushed by a boulder of in a blocking
-		 *         entity.
-		 */
-		@Override
+
 		public Boolean isCrushed() {
 			for (IMobile pawn : this.getMap().getPawns()) {
 				if (pawn.getSprite().getConsoleImage() == 'O' || pawn.getSprite().getConsoleImage() == 'V') {
@@ -219,22 +145,12 @@ public abstract class Mobile extends Element implements IMobile
 			return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
 		}
 
-		/**
-		 * @return Whether mapAllowsMovementTo and pawnAllowsMovementTo are both
-		 *         true.
-		 * 
-		 */
-		@Override
+
 		public Boolean canMoveTo(final UserOrder direction) {
 			return this.mapAllowsMovementTo(direction) && this.pawnsAllowMovementTo(direction);
 		}
 
-		/**
-		 * 
-		 * @param direction
-		 * @return Whether the map permeability is PENETRABLE at the given
-		 *         direction, compared to the current location.
-		 */
+
 		protected boolean mapAllowsMovementTo(final UserOrder direction) {
 			switch (direction) {
 			case UP:
@@ -255,12 +171,7 @@ public abstract class Mobile extends Element implements IMobile
 			}
 		}
 
-		/**
-		 * This method does NOT test the position of the player.
-		 * 
-		 * @param direction
-		 * @return if the pawn can step to the given direction
-		 */
+
 		protected Boolean pawnsAllowMovementTo(final UserOrder direction) {
 			Point desiredPosition = this.getPositionFromUserOrder(direction);
 			for (IMobile pawn : this.getMap().getPawns()) {
@@ -305,38 +216,25 @@ public abstract class Mobile extends Element implements IMobile
 			return this.position;
 		}
 
-		/**
-		 * Sets the position.
-		 *
-		 * @param position
-		 *            the position to set
-		 */
+
+
 		public void setPosition(final Point position) {
 			this.position = position;
 		}
 
-		/**
-		 * Gets the board.
-		 *
-		 * @return the board
-		 */
+
 		protected IBoard getBoard() {
 			return this.board;
 		}
 
-		@Override
 		public boolean isFalling() {
 			return fallSpeed;
 		}
 
-		/**
-		 * Removes this pawn from the board
-		 */
-		@Override
+
 		public void removeFromBoard() {
 			this.setPosition(new Point(1, -1));
 			this.getMap().getPawns().remove(this);
 		}
 
-		}
-	}
+}

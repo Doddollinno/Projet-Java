@@ -2,21 +2,17 @@ package model.Element.Strategy;
 
 import controller.IStrategy;
 
+
 import controller.UserOrder;
 import model.IMap;
 import model.IMobile;
 import model.Element.Permeability;
 
-public abstract class FallingStrategy implements IStrategy{
 
 	
-	public abstract class FallingObjectsStrategy implements IStrategy {
+	public abstract class FallingStrategy implements IStrategy {
 
-		/**
-		 * This Strategy applies to falling objects
-		 * @param currentPawn refers to the object on wich this strategy may apply
-		 * @param map refers to the map you move on.
-		 */
+
 		@Override
 		public void followStrategy(IMobile currentPawn, IMap map) {
 			// Check : can the Pawn go down ?
@@ -42,10 +38,10 @@ public abstract class FallingStrategy implements IStrategy{
 							}
 						}
 
-						// if the current pawn can go to right
+						// Can the pawn go right ?
 						if (currentPawn.canMoveTo(UserOrder.RIGHT)) {
 
-							// if the current pawn can go slide to the right to fall
+							// Can the Pawn slide and fall to the right ?
 							if (map.getSquareIsOccupiedXY(pawnVerif.getPosition().x + 1,
 									pawnVerif.getPosition().y) == Permeability.PENETRABLE) {
 								currentPawn.moveRight();

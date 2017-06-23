@@ -1,44 +1,49 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Observable;
+import model.Element.Permeability;
 
-public interface IMap {
+public interface IMap {		  
 
-    /**
-     * Gets the width.
-     *
-     * @return the width
-     */
-	int getWidth();
+			public int getWidth();
 
-    /**
-     * Gets the height.
-     *
-     * @return the height
-     */
-	int getHeight();
+			public int getHeight();
+			
+			
 
-    /**
-     * Gets the on the road XY.
-     *
-     * @param x
-     *            the x
-     * @param y
-     *            the y
-     * @return the on the road XY
-     */
-	void getOnTheMapXY(int x, int y);
+			public IElement getOnTheMapXY(int x, int y);
+			
 
-	/**
-     * Sets the mobile has changed.
-     */	
-	void setMobileHasChanged();
-	
-    /**
-     * Gets the observable.
-     *
-     * @return the observable
-     */
-	Observable getObservable();
+			public void setOnTheMapXY(int x, int y, IElement elem);
+			
 
-}
+			public void setMobileHasChanged();
+			
+
+			public Observable getObservable();
+			
+
+			public void addPawn(final IMobile pawn);
+			
+
+			public ArrayList<IMobile> getPawns();
+			
+
+			public void decreaseDiamondCount();
+			
+
+			public void addDiamondCount();
+			
+			
+			public int getDiamondCount();
+			
+
+			public IMobile getMyCharacter();
+			
+
+			public void setMyCharacter(IMobile character);
+			
+
+			public Permeability getSquareIsOccupiedXY(final int x, final int y);
+		}
