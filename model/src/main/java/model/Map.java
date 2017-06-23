@@ -21,7 +21,10 @@ public class Map {
 	/** The height. */
 	private int height;
 	
+	/** The elements */
 	private IElement[][] onTheMap;
+	
+	private ArrayList<IMobile> pawns;
 
 	 /**
      * Instantiates a new road with the content of the file fileName.
