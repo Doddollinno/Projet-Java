@@ -1,17 +1,62 @@
 package controller;
-import View.IBoulderDashView;
-import main.*;
-import Model.IBoulderDashModel;
+
+import java.io.IOException;
+
+import fr.exia.insanevehicles.controller.IOrderPerformer;
+import fr.exia.insanevehicles.controller.UserOrder;
+
+/**
+ * <h1>The Class BoulderDashController.</h1>
+ *
+ * @author Aaron
+ * @version 0.1
+ * @see IOrderPerformer
+ */
+
 public abstract class BoulderDashController implements IBoulderDashController, IOrderPerformer {
 
-	public int speed = 300;
-	private IBoulderDashModel model;
-	private IBoulderDashView view;
+	/** The Constant speed. */
+    private static final int speed = 300;
 
-	public void play() {
-		// TODO - implement BoulderDashController.play
-		throw new UnsupportedOperationException();
-	}
+    /** The view. */
+	private IBoulderDashView view;
+	
+	/** The model. */
+	private IBoulderDashModel model;
+	
+	/** The stack order. */
+    private UserOrder stackOrder;
+
+    @Override
+    public final void play() throws InterruptedException {
+        while (this.getModel().getMyCharacter().isAlive()) {
+            Thread.sleep(speed);
+            switch (this.getStackOrder()) {
+                case RIGHT:
+                    this.getModel().getMyCharacter().moveRight();
+                    break;
+                case UP:
+                    this.getModel().getMyCharacter().moveUp();
+                    break;
+                case DOWN:
+                    this.getModel().getMyCharacter().moveDown();
+                    break;
+                case LEFT:
+                    this.getModel().getMyCharacter().moveLeft();
+                    break;
+                case NOP:
+                default:
+                    this.getModel().getMyCharacter().doNothing();
+                    break;
+            }
+            this.clearStackOrder();
+            if (this.getModel().getMyCharacter().isAlive()) {
+                this.getModel().getMyCharacter().moveDown();
+            }
+            this.getView().followMyCharacter();
+        }
+        this.getView().displayMessage("YOU DIED");
+    }
 
 	private IBoulderDashView getView() {
 		return this.view;
@@ -22,27 +67,33 @@ public abstract class BoulderDashController implements IBoulderDashController, I
 	}
 
 	/**
-	 * 
-	 * @param stackOrder
-	 */
-	private void getStackOrder(UserOrder stackOrder) {
-		// TODO - implement BoulderDashController.getStackOrder
-		throw new UnsupportedOperationException();
-	}
+     * Gets the stack order.
+     *
+     * @return the stack order
+     */
+    private UserOrder getStackOrder() {
+        return this.stackOrder;
+    }
 
-	private void clearStackOrder() {
-		// TODO - implement BoulderDashController.clearStackOrder
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * Clear stack order.
+     */
+    private void clearStackOrder() {
+        this.stackOrder = UserOrder.NOP;
+    }
 
-	/**
-	 * 
-	 * @param view
-	 * @param model
-	 */
+    /**
+     * Instantiates a new boulder dash controller.
+     *
+     * @param view
+     *            the view
+     * @param model
+     *            the model
+     */
 	public BoulderDashController(IBoulderDashView view, IBoulderDashModel model) {
-		// TODO - implement BoulderDashController.BoulderDashController
-		throw new UnsupportedOperationException();
+		this.setView(view);
+        this.setModel(model);
+        this.clearStackOrder();
 	}
 
 	/**
@@ -61,18 +112,18 @@ public abstract class BoulderDashController implements IBoulderDashController, I
 		this.model = model;
 	}
 
-	public IOrderPerformer getOrderPerformer() {
-		// TODO - implement BoulderDashController.getOrderPerformer
-		throw new UnsupportedOperationException();
-	}
+	@Override
+    public IOrderPerformer getOrderPeformer() {
+        return this;
+    }
 
 	/**
 	 * 
 	 * @param userOrder
 	 */
-	public void orderPerform(UserOrder userOrder) {
-		// TODO - implement BoulderDashController.orderPerform
-		throw new UnsupportedOperationException();
-	}
+	@Override
+    public final void orderPerform(final UserOrder userOrder) throws IOException {
+        this.setStackOrder(userOrder);
+    }
 
 }
