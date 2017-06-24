@@ -6,12 +6,14 @@ import model.dao.MapDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import model.IMap;
 import model.IModel;
 
 import model.Map;
 
-public abstract class BoulderDashModel implements IModel {
+public class BoulderDashModel implements IBoulderDashModel {
 
 	/** The map. */
 	private Map map;

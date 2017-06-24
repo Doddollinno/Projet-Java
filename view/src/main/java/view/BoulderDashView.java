@@ -1,259 +1,243 @@
 package view;
 
-import model.IMap;
-import model.Element.Mobile.IMobile;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import controller.IOrderPerformer;
 import controller.UserOrder;
+import model.IMap;
+import model.IMobile;
 import fr.exia.showboard.BoardFrame;
 
-import javax.swing.JOptionPane;
-import main.*;
-import controller.
-
+/**
+ * The Class GenericView.</h1>
+ * 
+ * @author Aaron
+ * @version 1.0
+ */
 public class BoulderDashView implements IBoulderDashView, Runnable, KeyListener {
+	/** The Constant squareSize. */
+	protected static final int squareSize = Toolkit.getDefaultToolkit().getScreenSize().width / 20;
 
-	private int mapView = 10;
-	private int squareSize = 50;
-	private int view;
-	private IMap Map;
-	private IMobile myCharacter;
-	private IOrderPerformer orderPerformer;
+	/** The map. */
+	protected IMap map = null;
+
+	/** The player's character. */
+	protected IMobile myCharacter = null;
+
+	/** The list of pawns. */
+	protected ArrayList<IMobile> pawns = null;
+
+	/** The close view. */
+	protected Rectangle closeView = null;
+
+	/** The order performer. */
+	protected IOrderPerformer orderPerformer = null;
+
+	/** The BoardFrame. */
+	protected final BoardFrame boardFrame = new BoardFrame("BoulderDash");
 
 	/**
-	 * 
-	 * @param map
-	 * @param myCharacter
+	 * Key code to user order.
+	 *
+	 * @param keyCode
+	 *            the key code
+	 * @return the user order
 	 */
-	public BoulderDashView(final IMap map, final IMobile MyCharacter) {
-		this.setView(mapView);
-        this.setMap(map);
-        this.setMyCharacter(MyCharacter);
-        this.getMyCharacter().getSprite().loadImage();
-        this.setCloseView(new Rectangle(0, this.getMyCharacter().getY(), this.getMap().getWidth(), MapView));
-        SwingUtilities.invokeLater(this);
+	
+	public BoulderDashView (final IMap map, final IMobile character, final ArrayList<IMobile> pawns) throws IOException {
+		super();
+		this.setMap(map);
+		this.setMyCharacter(character);
+		this.setPawns(pawns);
+		this.setCloseView(this.getReasonableViewPort());
+		SwingUtilities.invokeLater(this);
+	}
+	
+	
+	protected static UserOrder keyCodeToUserOrder(final int keyCode) {
+		UserOrder userOrder;
+		switch (keyCode) {
+		case KeyEvent.VK_RIGHT:
+			userOrder = UserOrder.RIGHT;
+			break;
+		case KeyEvent.VK_LEFT:
+			userOrder = UserOrder.LEFT;
+			break;
+		case KeyEvent.VK_UP:
+			userOrder = UserOrder.UP;
+			break;
+		case KeyEvent.VK_DOWN:
+			userOrder = UserOrder.DOWN;
+			break;
+		default:
+			userOrder = UserOrder.NOP;
+			break;
+		}
+		return userOrder;
+	}
+
+	protected void setMyCharacter(final IMobile newCharacter) {
+		this.myCharacter = newCharacter;
+	}
+
+	protected IMobile getMyCharacter() {
+		return this.myCharacter;
+	}
+
+	protected void setCloseView(final Rectangle newView) {
+		this.closeView = newView;
 	}
 
 	/**
+	 * Gets a reasonable size for the close view depending on the map.
 	 * 
-	 * @param message
+	 * @return A rectangle with reasonable dimensions
 	 */
-	public void displayMessage(String message) {
+	protected Rectangle getReasonableViewPort() {
+		int reasonableWidth;
+		int reasonableHeight;
+
+		// First let's find a reasonable width
+		if ((int) (map.getWidth() * 0.75) > 10) {
+			reasonableWidth = 10;
+		} else if ((int) (map.getWidth() * 0.75) < 5) {
+			reasonableWidth = map.getWidth();
+		} else {
+			reasonableWidth = (int) (map.getWidth() * 0.75);
+		}
+
+		// Now the same with height
+		if ((int) (map.getHeight() * 0.75) > 10) {
+			reasonableHeight = 10;
+		} else if ((int) (map.getHeight() * 0.75) < 5) {
+			reasonableHeight = map.getHeight();
+		} else {
+			reasonableHeight = (int) (map.getHeight() * 0.75);
+		}
+
+		return new Rectangle(0, 0, reasonableWidth, reasonableHeight);
+	}
+
+	protected IMap getMap() {
+		return this.map;
+	}
+
+	public Rectangle getCloseView() {
+		return closeView;
+	}
+
+	protected IOrderPerformer getOrderPerformer() {
+		return this.orderPerformer;
+	}
+
+	public void setOrderPerformer(final IOrderPerformer newPerformer) {
+		this.orderPerformer = newPerformer;
+	}
+
+	/**
+	 * Update the board frame and redraws squares.
+	 */
+	public void updateBoardFrame() {
+		for (int x = 0; x < this.getMap().getWidth(); x++) {
+			for (int y = 0; y < this.getMap().getHeight(); y++) {
+				boardFrame.addSquare(this.map.getOnTheMapXY(x, y), x, y);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param newPawns
+	 *            The pawn list.
+	 */
+	protected void setPawns(final ArrayList<IMobile> newPawns) {
+		this.pawns = newPawns;
+	}
+
+
+
+	/**
+	 * Displays the message in dialog box.
+	 * 
+	 * @see contract.view.IView#displayMessage(java.lang.String)
+	 */
+	@Override
+	public final void displayMessage(final String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
 
-	public void run() {
-        final BoardFrame boardFrame = new BoardFrame("Close view");
-        boardFrame.setDimension(new Dimension(this.getMap().getWidth(), this.getMap().getHeight()));
-        boardFrame.setDisplayFrame(this.closeView);
-        boardFrame.setSize(this.closeView.width * squareSize, this.closeView.height * squareSize);
-        boardFrame.setHeightLooped(true);
-        boardFrame.addKeyListener(this);
-        boardFrame.setFocusable(true);
-        boardFrame.setFocusTraversalKeysEnabled(false);
-
-        for (int x = 0; x < this.getMap().getWidth(); x++) {
-            for (int y = 0; y < this.getMap().getHeight(); y++) {
-                boardFrame.addSquare(this.Map.getOnTheRoadXY(x, y), x, y);
-            }
-        }
-        boardFrame.addPawn(this.getMyCharacter());
-
-        this.getMap().getObservable().addObserver(boardFrame.getObserver());
-        this.followMyCharacter();
-
-        boardFrame.setVisible(true);
-    }
-
-	/**
-     * Prints the road and the player's vehicle in the console.
-     *
-     * @param yStart
-     *            the y start
-     */
-	public void show(int yStart) {
-        int y = yStart % this.getMap().getHeight();
-        for (int view = 0; view < this.getView(); view++) {
-            for (int x = 0; x < this.getMap().getWidth(); x++) {
-                if ((x == this.getMyCharacter().getX()) && (y == yStart)) {
-                    System.out.print(this.getMyCharacter().getSprite().getConsoleImage());
-                } else {
-                    System.out.print(this.getMap().getOnTheRoadXY(x, y).getSprite().getConsoleImage());
-                }
-            }
-            y = (y + 1) % this.getMap().getHeight();
-            System.out.print("\n");
-        }
-    }
-
-	 /**
-     * Key code to user order.
-     *
-     * @param keyCode
-     *            the key code
-     * @return the user order
-     */
-	public UserOrder keyCodeToUserOrder(int keyCode) {
-		 UserOrder userOrder;
-		    switch (keyCode) {
-		        case KeyEvent.VK_RIGHT:
-		            userOrder = UserOrder.RIGHT;
-		            break;
-		        case KeyEvent.VK_LEFT:
-		            userOrder = UserOrder.LEFT;
-		            break;
-		        case KeyEvent.VK_UP;
-		        	userOrder = UserOrder.UP;
-		        	break;
-		        case KeyEvent.VK_DOWN;
-		    		userOrder = UserOrder.DOWN;
-		    		break;
-		        default:
-		            userOrder = UserOrder.NOP;
-		            break;
-		    }
-		    return userOrder;
-		}
-			
-
-	/**
-	 * 
-	 * @param keyEvent
-	 */
-	public void keyTyped(KeyEvent keyEvent) {
-		//Nop
-	}
-	
-    
-
-	/**
-	 * 
-	 * @param keyEvent
-	 */
-	public void keyPressed(KeyEvent keyEvent) try {
-        this.getOrderPerformer().orderPerform(keyCodeToUserOrder(keyEvent.getKeyCode()));
-    } catch (final IOException exception) {
-        exception.printStackTrace();
-    }
-}
-	/**
-	 * 
-	 * @param keyEvent
-	 */
-	public void keyReleased(KeyEvent keyEvent) {
-		//Nop
-	}
-	
-	/**
-     * Gets the Map.
-     *
-     * @return the map
-     */
-	private IMap getMap() {
-		return this.map
-	}
-
-    /**
-     * Sets the road.
-     *
-     * @param road
-     *            the new road
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-	public void setMap(IMap Map) throws IOException {
-		this.Map = Map;
+	private void setMap(final IMap newMap) throws IOException {
+		this.map = newMap;
 		for (int x = 0; x < this.getMap().getWidth(); x++) {
 			for (int y = 0; y < this.getMap().getHeight(); y++) {
-				this.getMap().getOnTheRoadXY(x, y).getSprite().loadImage();
+				this.getMap().getOnTheMapXY(x, y).getSprite().loadImage();
 			}
 		}
 	}
 
-	public IMobile getMyCharacter() {
-		return this.myCharacter;
-	}
-
-    /**
-     * Gets my character.
-     *
-     * @return my character
-     */
-	public void setMyCharacter(IMobile myCharacter) {
-		this.myCharacter = myCharacter;
-	}
-	
-    /**
-     * Gets the view.
-     *
-     * @return the view
-     */
-	public int getView() {
-		return this.view;
-	}
-
-    /**
-     * Sets the view.
-     *
-     * @param view
-     *            the new view
-     */
-	private void setView(int view) {
-		this.view = view;
-	}
-
-    /**
-     * Gets the close view.
-     *
-     * @return the close view
-     */
-	private Rectangle getCloseView() {
-		return this.closeView;
-	}
-
-    /**
-     * Sets the close view.
-     *
-     * @param closeView
-     *            the new close view
-     */
-	private void setCloseView(Rectangle closeView) {
-		this.closeView = closeView;
-	}
-
-    /**
-     * Gets the order performer.
-     *
-     * @return the order performer
-     */
-	private IOrderPerformer getOrderPerformer() {
-		return this.orderPerformer;
-	}
-
-    /**
-     * Sets the order performer.
-     *
-     * @param orderPerformer
-     *            the new order performer
-     */
-	public void setOrderPerformer(IOrderPerformer orderPerformer) {
-		this.orderPerformer = orderPerformer;
-	}
-
-	
 	/**
-	 * The View Follow MyCharacter
+	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
 	 */
+	@Override
+	public final void keyPressed(final KeyEvent keyEvent) {
+		try {
+			this.getOrderPerformer().orderPerform(keyCodeToUserOrder(keyEvent.getKeyCode()));
+		} catch (final IOException exception) {
+			exception.printStackTrace();
+		}
+	}
+
+	@Override
+	public void keyReleased(final KeyEvent keyEvent) {
+		// Nop
+	}
+
+	@Override
+	public void keyTyped(final KeyEvent keyEvent) {
+		// Nop
+	}
+
+	@Override
+	public final void run() {
+		boardFrame.setDimension(new Dimension(this.getMap().getWidth(), this.getMap().getHeight()));
+		boardFrame.setDisplayFrame(this.closeView);
+		boardFrame.setSize(this.closeView.width * squareSize, this.closeView.height * squareSize);
+		boardFrame.addKeyListener(this);
+		boardFrame.setFocusable(true);
+		boardFrame.setFocusTraversalKeysEnabled(false);
+
+		for (int x = 0; x < this.getMap().getWidth(); x++) {
+			for (int y = 0; y < this.getMap().getHeight(); y++) {
+				boardFrame.addSquare(this.map.getOnTheMapXY(x, y), x, y);
+			}
+		}
+		boardFrame.addPawn(this.getMyCharacter());
+		for (IMobile pawn : this.pawns) {
+			boardFrame.addPawn(pawn);
+		}
+
+		this.getMap().getObservable().addObserver(boardFrame.getObserver());
+		this.followMyCharacter();
+
+		boardFrame.setVisible(true);
+
+	}
+
+	/**
+	 * Move the view to focus on the character.
+	 */
+	@Override
 	public void followMyCharacter() {
-		
 		this.getCloseView().y = (int) (this.myCharacter.getY() - (this.getCloseView().getHeight() / 2));
 		this.getCloseView().x = (int) (this.myCharacter.getX() - (this.getCloseView().getWidth() / 2));
 
@@ -268,6 +252,4 @@ public class BoulderDashView implements IBoulderDashView, Runnable, KeyListener 
 			this.getCloseView().x = (int) (this.map.getWidth() - this.getCloseView().getWidth());
 		}
 	}
-        }
-
-	}
+}

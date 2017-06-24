@@ -1,10 +1,17 @@
 package main;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
-import controller.ControllerFacade;
-import model.ModelFacade;
-import view.ViewFacade;
+import javax.swing.JOptionPane;
+
+import controller.BoulderDashController;
+import controller.IBoulderDashController;
+import model.BoulderDashModel;
+import model.IBoulderDashModel;
+import model.IModel;
+import view.BoulderDashView;
+import view.IBoulderDashView;
 
 /**
  * La classe principale
@@ -14,20 +21,22 @@ import view.ViewFacade;
  */
 public abstract class Main {
 
-    /**
-     * The main method.
-     *
-     * @param args
-     *            the arguments
-     */
-    public static void main(final String[] args) {
-        final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
+	public static void main(final String[] args) throws SQLException, IOException {
 
-        try {
-            controller.start();
-        } catch (final SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
+		String idToAsk= JOptionPane.showInputDialog("ID MAP ", 1);
+		int idAsked = Integer.parseInt(idToAsk);
 
+		final BoulderDashModel model = new BoulderDashModel(idAsked);
+		final BoulderDashView view = new BoulderDashView(model.getMap(), model.getMyCharacter(), model.getMap().getPawns());
+		final BoulderDashController controller = new BoulderDashController(model, view);
+		view.setOrderPerformer(controller.getOrderPeformer());
+
+		try {
+			controller.play();
+		} catch (InterruptedException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 }
+

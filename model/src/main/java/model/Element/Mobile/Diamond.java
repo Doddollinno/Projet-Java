@@ -20,6 +20,11 @@ public class Diamond extends Mobile {
 		super(sprite, Map, permeability);
 		sprite.loadImage();
 	}
+	
+	public Diamond(int currentXToWrite, int currentYToWrite, IMap tempMap) throws IOException {
+		super(currentXToWrite, currentYToWrite, SPRITE, tempMap, Permeability.BLOCKING);	
+		SPRITE.loadImage();
+	}
 
 
 	@Override

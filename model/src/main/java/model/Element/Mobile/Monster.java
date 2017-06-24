@@ -11,13 +11,13 @@ import model.Element.Permeability;
 import model.Element.Sprite;
 import model.Element.Strategy.MonsterStrategy;
 
-public abstract class Monster extends Mobile {
+public class Monster extends Mobile {
 	
 	
 	private static final IStrategy randomStrategy = new MonsterStrategy();
 	
-	private static Sprite sprite = new Sprite('M',"74359_10.png");
-	private static Sprite spriteExplode = new Sprite('M',"74359_46.png");
+	private static Sprite SPRITE = new Sprite('M',"74359_10.png");
+	private static Sprite spriteDeath = new Sprite('M',"74359_46.png");
 	
 	/** The strategy in use by this monster */
 	private IStrategy myStrategy = randomStrategy;
@@ -27,6 +27,12 @@ public abstract class Monster extends Mobile {
 
 	public Monster(int x, int y, model.Element.Sprite sprite, IMap Map, Permeability permeability) {
 		super(x, y, sprite, Map, Permeability.BLOCKING);	
+	}
+	
+	public Monster(int currentXToWrite, int currentYToWrite, IMap tempMap) throws IOException {
+		super(currentXToWrite, currentYToWrite, SPRITE, tempMap, Permeability.BLOCKING);	
+		SPRITE.loadImage();
+		this.myStrategy = Monster.randomStrategy;
 	}
 
 	/**
@@ -41,11 +47,6 @@ public abstract class Monster extends Mobile {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public Monster(final int x, final int y, final IMap map) throws IOException {
-		super(x, y, sprite, map, Permeability.BLOCKING);
-		getSprite().loadImage();
-		this.myStrategy = Monster.randomStrategy;
-	}
 
 	@Override
 	public final void moveLeft() {
@@ -69,12 +70,12 @@ public abstract class Monster extends Mobile {
 
 	protected void die() {
 		super.die();
-		this.setSprite(spriteExplode);
+		this.setSprite(spriteDeath);
 	}
 
 	public void doNothing() {
 		super.doNothing();
-        this.setSprite(sprite);
+        this.setSprite(SPRITE);
 	}
 
 	@Override
@@ -90,6 +91,12 @@ public abstract class Monster extends Mobile {
 	@Override
 	public void setLastWallTouched(final UserOrder userOrder) {
 		this.lastWallTouched = userOrder;
+	}
+
+	@Override
+	public Boolean IsDead() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

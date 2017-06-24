@@ -7,17 +7,22 @@ import model.IMap;
 import model.Element.Permeability;
 import model.Element.Sprite;
 import model.Element.Strategy.BoulderStrategy;
-import model.Element.Strategy.DiamondStrategy;
+import model.Element.Strategy.NoStrategy;
 
-public class Rock extends Mobile {
+
+public class Rock extends Mobile{
 
 	private static final Sprite SPRITE = new Sprite('R', "74359_28.png");
-	private static final IStrategy strategy = new BoulderStrategy();
+	private static IStrategy strategy = new BoulderStrategy();
 	
 	public Rock(int x, int y, Sprite sprite, IMap Map) throws IOException {
 		super(x, y, sprite, Map, Permeability.BLOCKING);	
-		sprite.loadImage();
 		}
+
+	public Rock(int currentXToWrite, int currentYToWrite, IMap tempMap) throws IOException {
+		super(currentXToWrite, currentYToWrite, SPRITE, tempMap, Permeability.BLOCKING);	
+		SPRITE.loadImage();
+	}
 
 	@Override
 	public Boolean IsDead() {
@@ -27,5 +32,9 @@ public class Rock extends Mobile {
 	@Override
 	public void followMyStrategy() {
 		Rock.strategy.followStrategy(this, this.getMap());
+	}
+	
+	public void removeStrategy() {
+		Rock.strategy = new NoStrategy();
 	}
 }

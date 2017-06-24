@@ -1,5 +1,7 @@
 package view;
 
+import controller.IOrderPerformer;
+
 public interface IBoulderDashView {
 
 	/**

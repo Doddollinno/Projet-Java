@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import model.IElement;
-import model.IMap;
+import model.Element.Element;
 import model.Element.Permeability;
-import java.util.Observable;
 import model.IMobile;
 
-public class Map extends Observable{
+public class Map extends Observable implements IMap{
 	
 	/** The width. */
 	private int width;
@@ -34,14 +33,7 @@ public class Map extends Observable{
 	  /** The diamond count */
 	  private int diamondCount = 0;
 
-	 /**
-     * Instantiates a new road with the content of the file fileName.
-     *
-     * @param fileName
-     *            the file name where the map of the road is
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
+
 	  
 	  public Map(final int newWidth, final int newHeight, final IElement[][] newMap) throws SQLException {
 		    super();
@@ -50,13 +42,6 @@ public class Map extends Observable{
 		    this.height = newHeight;
 		    this.pawns = new ArrayList<IMobile>();
 		  }
-
-	
-
-	public Map(int newWidth, int newHeight) {
-		this.width = newWidth;
-	    this.height = newHeight;
-	}
 
 
 
@@ -97,7 +82,7 @@ public class Map extends Observable{
 	 * 
 	 * @param element
 	 */
-	private void setOnTheMapXY(IElement element, final int x, final int y) {
+	public void setOnTheMapXY(IElement element, final int x, final int y) {
 		this.onTheMap[x][y] = element;
 	}
 
@@ -132,4 +117,46 @@ public class Map extends Observable{
 		    
 		    return this.getOnTheMapXY(x, y).getPermeability();
 		  }
+
+	 public void decreaseDiamondCount() {
+	    this.diamondCount--;
+	  }
+
+	  public void addDiamondCount() {
+	    this.diamondCount++;
+	  }
+
+	  public int getDiamondCount() {
+	    return this.diamondCount;
+	  }
+
+
+
+	@Override
+	public void setOnTheMapXY(int x, int y, Element element) {
+		this.onTheMap[x][y] = element;
+	}
+
+
+
+	@Override
+	  public final void setMobileHasChanged() {
+	    this.setChanged();
+	    this.notifyObservers();
+	  }
+
+
+
+	@Override
+	  public void addPawn(IMobile pawn) {
+	    this.pawns.add(pawn);
+	  }
+
+
+
+	@Override
+	public void setMyCharacter(IMobile character) {
+		// TODO Auto-generated method stub
+		this.myCharacter = character;
+	}
 }

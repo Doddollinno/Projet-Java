@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import model.IElement;
 import model.Map;
 import model.Element.ElementFactory.ElementFactory;
+import model.Element.Mobile.Diamond;
+import model.Element.Mobile.Monster;
+import model.Element.Mobile.Rock;
 
 /**
  * <h1>The Class MapDAO.</h1>
@@ -83,11 +86,11 @@ public abstract class MapDAO extends AbstractDAO {
 
 		for (char c : result.getString(mapColumnIndex).toCharArray()) {
 			if (!skipNext) {
-				tempMap.setOnTheMapXY(currentXToWrite, currentYToWrite, ElementFactory.getFromFileSymbol(c));
+				tempMap.setOnTheMapXY(ElementFactory.getFromFileSymbol(c),currentXToWrite, currentYToWrite);
 
 				
 				if (c == 'O')
-					tempMap.addPawn(new Boulder(currentXToWrite, currentYToWrite, tempMap));
+					tempMap.addPawn(new Rock(currentXToWrite, currentYToWrite, tempMap));
 				else if (c == 'V') {
 					tempMap.addPawn(new Diamond(currentXToWrite, currentYToWrite, tempMap));
 					tempMap.addDiamondCount();

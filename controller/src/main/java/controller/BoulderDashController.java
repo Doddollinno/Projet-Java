@@ -13,10 +13,7 @@ import java.io.IOException;
  * @see IOrderPerformer
  */
 
-public abstract class BoulderDashController implements IBoulderDashController, IOrderPerformer {
-
-	/** The Constant speed. */
-    private static final int speed = 300;
+public class BoulderDashController implements IBoulderDashController, IOrderPerformer {
 
     /** The view. */
 	private IBoulderDashView view;
@@ -24,13 +21,16 @@ public abstract class BoulderDashController implements IBoulderDashController, I
 	/** The model. */
 	private IBoulderDashModel model;
 	
+	  /** The actual speed of each loop in the game. */
+	  private static final int StaticSpeed = 200;
+	
 	/** The stack order. */
-    private UserOrder stackOrder;
+    private UserOrder stackOrder = UserOrder.NOP;
 
-    @Override
+	@Override
     public final void play() throws InterruptedException {
         while (this.getModel().getMyCharacter().isAlive()) {
-            Thread.sleep(speed);
+            Thread.sleep(StaticSpeed);
             switch (this.getStackOrder()) {
                 case RIGHT:
                     this.getModel().getMyCharacter().moveRight();
@@ -52,10 +52,15 @@ public abstract class BoulderDashController implements IBoulderDashController, I
             this.clearStackOrder();
             if (this.getModel().getMyCharacter().isAlive()) {
                 this.getModel().getMyCharacter().moveDown();
+                if (this.getModel().getMap().getDiamondCount() == 0) {
+                    this.getView().displayMessage("You won !! Congratulations ;) ");
+                    System.exit(0);
+                  }
             }
             this.getView().followMyCharacter();
         }
         this.getView().displayMessage("YOU DIED");
+        System.exit(0);
     }
 
 	private IBoulderDashView getView() {
@@ -99,10 +104,11 @@ public abstract class BoulderDashController implements IBoulderDashController, I
      *            the view
      * @param model
      *            the model
+     * @return 
      */
-	public BoulderDashController(IBoulderDashView view, IBoulderDashModel model) {
-		this.setView(view);
+	public BoulderDashController(IBoulderDashModel model, IBoulderDashView view) {
         this.setModel(model);
+		this.setView(view);
         this.clearStackOrder();
 	}
 
