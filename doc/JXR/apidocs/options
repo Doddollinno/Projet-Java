@@ -1,0 +1,25 @@
+-classpath
+'C:/Users/sebag/OneDrive/Documents/GitHub/Projet-Java/target/classes'
+-encoding
+'Cp1252'
+-private
+-sourcepath
+'C:/Users/sebag/OneDrive/Documents/GitHub/Projet-Java/boulderdash/contract/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2017. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/sebag/OneDrive/Documents/GitHub/Projet-Java/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Projet-Java 0.0.1-SNAPSHOT API'
+-link
+'http://java.sun.com/javase/6/docs/api'
+-nohelp
+-use
+-version
+-windowtitle
+'Projet-Java 0.0.1-SNAPSHOT API'

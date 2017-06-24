@@ -4,16 +4,22 @@ import model.Element.Element;
 import model.Element.Permeability;
 import model.Element.Sprite;
 
-public class MotionlessElement extends Element {
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MotionlessElement.
+ */
+public abstract class MotionlessElement extends Element {
 
 	/**
-	 * 
-	 * @param sprite
-	 * @param permeability
+	 * Instantiates a new motionless element.
+	 *
+	 * @param sprite the sprite
+	 * @param permeability the permeability
 	 */
-	private MotionlessElement(Sprite sprite, Permeability permeability) {
+	public MotionlessElement(Sprite sprite, Permeability permeability) {
 		super(sprite, permeability);
-		// TODO - implement MotionlessElement.MotionlessElement
-		throw new UnsupportedOperationException();
 	}
+	
+
+	
 }

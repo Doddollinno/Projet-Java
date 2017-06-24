@@ -1,11 +1,12 @@
 package controller;
 
-/**
- * <h1>The Interface IController.</h1>
- * 
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
- */
+import java.sql.SQLException;
+
 public interface IController {
 
+	 void start() throws InterruptedException, SQLException;
+
+	 IOrderPerformer getOrderPeformer();
 }
+
+

@@ -23,5 +23,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/Users/sebag/Downloads/jpu2017_Sequence4_insane_vehicles/showboard.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

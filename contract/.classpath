@@ -23,5 +23,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="src" path="/model"/>
+	<classpathentry kind="src" path="/controller"/>
+	<classpathentry kind="lib" path="D:/Users/sebag/Downloads/jpu2017_Sequence4_insane_vehicles/showboard.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

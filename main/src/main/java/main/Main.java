@@ -1,10 +1,10 @@
 package main;
 
+import java.io.IOException;
 import java.sql.SQLException;
-
-import controller.ControllerFacade;
-import model.ModelFacade;
-import view.ViewFacade;
+import controller.BoulderDashController;
+import model.BoulderDashModel;
+import view.BoulderDashView;
 
 /**
  * La classe principale
@@ -14,20 +14,26 @@ import view.ViewFacade;
  */
 public abstract class Main {
 
-    /**
-     * The main method.
-     *
-     * @param args
-     *            the arguments
-     */
-    public static void main(final String[] args) {
-        final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static void main(final String[] args) throws SQLException, IOException {
 
-        try {
-            controller.start();
-        } catch (final SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
+		final BoulderDashModel model = new BoulderDashModel(3);
+		final BoulderDashView view = new BoulderDashView(model.getMap(), model.getMyCharacter(), model.getMap().getPawns());
+		final BoulderDashController controller = new BoulderDashController(model, view);
+		view.setOrderPerformer(controller.getOrderPeformer());
 
+		try {
+			controller.play();
+		} catch (InterruptedException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 }
+
