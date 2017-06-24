@@ -30,7 +30,6 @@ public class BoulderDashModel implements IBoulderDashModel {
 	 */
 	public BoulderDashModel(final int mapID) throws SQLException, IOException {
 		super();
-		Sprite.loadBuffers();
 		this.setMap(MapDAO.getMapById(mapID));
 		this.myCharacter = new MyCharacter(1, 1, this.getMap());
 	}

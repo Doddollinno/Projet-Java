@@ -14,5 +14,6 @@
 	<classpathentry kind="src" path="view/src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="D:/Users/sebag/Downloads/jpu2017_Sequence4_insane_vehicles/showboard.jar"/>
+	<classpathentry kind="lib" path="D:/Users/sebag/Downloads/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar"/>
 	<classpathentry kind="output" path="contract/target/classes"/>
 </classpath>

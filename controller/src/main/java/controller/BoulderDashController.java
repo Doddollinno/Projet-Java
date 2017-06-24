@@ -51,7 +51,7 @@ public class BoulderDashController implements IBoulderDashController, IOrderPerf
             }
             this.clearStackOrder();
             if (this.getModel().getMyCharacter().isAlive()) {
-                this.getModel().getMyCharacter().moveDown();
+                this.getModel().getMyCharacter().doNothing();
                 if (this.getModel().getMap().getDiamondCount() == 0) {
                     this.getView().displayMessage("You won !! Congratulations ;) ");
                     System.exit(0);

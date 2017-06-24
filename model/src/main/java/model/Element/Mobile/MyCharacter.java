@@ -1,9 +1,12 @@
 package model.Element.Mobile;
 
+import java.awt.Point;
 import java.io.IOException;
 
+import controller.UserOrder;
 import model.Element.Sprite;
 import model.IMap;
+import model.IMobile;
 import model.Element.Permeability;
 
 public class MyCharacter extends Mobile {
@@ -39,6 +42,7 @@ public class MyCharacter extends Mobile {
 	
 	public MyCharacter(final int x, final int y, final IMap Map) throws IOException   {
 		super(x, y, sprite, Map, Permeability.BLOCKING);
+		sprite.loadImage();
 		spriteTurnLeft.loadImage();
         spriteTurnRight.loadImage();
         spriteTurnDown.loadImage();
@@ -89,6 +93,4 @@ public class MyCharacter extends Mobile {
 		// TODO Auto-generated method stub
 		
 	}
-
-
 }

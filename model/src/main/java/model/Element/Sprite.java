@@ -88,30 +88,6 @@ public class Sprite {
     /**
 	 * Loads the buffers for the characters and the map
 	 */
-	public static void loadBuffers() {
-		try {
-			int randomNum = (int) (Math.random() * 6);
-			Sprite.characterTileSet = ImageIO.read(new File("images/characterSet.png"));
-			Sprite.mapTileSet = ImageIO.read(new File("images/mapSet.png"));
-			Sprite.mapTileSet = Sprite.cropBuffer(Sprite.mapTileSet, randomNum);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			System.out.println("Working directory: " + System.getProperty("user.dir"));
-		}
-	}
 
-
-	private  static BufferedImage cropBuffer(final BufferedImage src, final int offset) {
-		BufferedImage img = new BufferedImage(16 * 11, 16 * 4, BufferedImage.TYPE_INT_RGB);
-
-		for (int currentXToWrite = 0; currentXToWrite < 16 * 11; currentXToWrite++) {
-			for (int currentYToWrite = 0, currentYToRead = offset * 16 * 4; currentYToWrite < 16 * 4; currentYToWrite++, currentYToRead++) {
-				int color = src.getRGB(currentXToWrite, currentYToRead);
-				img.setRGB(currentXToWrite, currentYToWrite, color);
-			}
-		}
-		return img;
-	}
 
 }

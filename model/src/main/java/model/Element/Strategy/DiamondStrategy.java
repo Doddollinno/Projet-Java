@@ -7,7 +7,6 @@ import model.Element.Strategy.FallingStrategy;
 public class DiamondStrategy extends FallingStrategy {
 
 	public void followStrategy(IMobile currentPawn, IMap map) {
-		// if the currentPawn is above the player
 		if ((currentPawn.getPosition().y == map.getMyCharacter().getPosition().y - 1
 				&& currentPawn.getPosition().x == map.getMyCharacter().getPosition().x)
 				|| currentPawn.getPosition().equals(map.getMyCharacter().getPosition())) {
@@ -15,6 +14,10 @@ public class DiamondStrategy extends FallingStrategy {
 			map.decreaseDiamondCount();
 			return;
 		}
+		if ((currentPawn.getPosition().y == map.getMyCharacter().getPosition().y) 
+			&& currentPawn.getPosition().x == map.getMyCharacter().getPosition().x)
+				map.addDiamondCount();
+				currentPawn.removeFromBoard();
 		super.followStrategy(currentPawn, map);
 	}
 }

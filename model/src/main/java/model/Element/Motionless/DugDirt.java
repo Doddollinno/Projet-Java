@@ -8,12 +8,12 @@ import model.Element.Sprite;
 public class DugDirt extends MotionlessElement  {
 
     /** The Constant SPRITE. */
-    private static final Sprite SPRITE = new Sprite('V', "DUGDIRT.JPG");
+    private static final Sprite SPRITE = new Sprite(' ', "74359_02.png");
 
     /**
      * Instantiates a new ditch.
      */
     public DugDirt() {
-    	super(SPRITE, Permeability.PENETRABLE);
+    	super(SPRITE, Permeability.BLOCKING);
     }
 }
