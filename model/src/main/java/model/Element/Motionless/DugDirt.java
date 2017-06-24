@@ -5,6 +5,10 @@ import javax.lang.model.element.Element;
 import model.Element.Permeability;
 import model.Element.Sprite;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DugDirt.
+ */
 public class DugDirt extends MotionlessElement  {
 
     /** The Constant SPRITE. */

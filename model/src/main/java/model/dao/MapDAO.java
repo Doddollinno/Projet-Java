@@ -35,12 +35,10 @@ public abstract class MapDAO extends AbstractDAO {
 	/**
 	 * Gets the example by id.
 	 *
-	 * @param id
-	 *            the id
+	 * @param id            the id
 	 * @return the map by id
-	 * @throws SQLException
-	 *             the SQL exception
-	 * @throws IOException
+	 * @throws SQLException             the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static Map getMapById(final int id) throws SQLException, IOException {
 		final CallableStatement callStatement = prepareCall(sqlMapById);
@@ -73,11 +71,28 @@ public abstract class MapDAO extends AbstractDAO {
 		return tempMap;
 	}
 	
+	/**
+	 * Test correct level.
+	 *
+	 * @param width the width
+	 * @param height the height
+	 * @param mapString the map string
+	 * @throws Exception the exception
+	 */
 	private static void testCorrectLevel(final int width, final int height, final String mapString) throws Exception {
 		if(width * height + height != mapString.length())
 			throw new Exception("Level is not good >:( x:" + width + " y: " + height + " size: " + mapString.length());
 	}
 
+	/**
+	 * Place pawns on map.
+	 *
+	 * @param result the result
+	 * @param tempMap the temp map
+	 * @param width the width
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private static void placePawnsOnMap(final ResultSet result, final Map tempMap, int width) throws SQLException, IOException {
 
 		int currentXToWrite = 0;

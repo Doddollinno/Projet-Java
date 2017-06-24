@@ -27,6 +27,11 @@ public class BoulderDashController implements IBoulderDashController, IOrderPerf
 	/** The stack order. */
     private UserOrder stackOrder = UserOrder.NOP;
 
+	
+	
+	/** (non-Javadoc)
+	 * @see controller.IBoulderDashController#play()
+	 */
 	public final void play() throws InterruptedException {
         while (this.getModel().getMyCharacter().isAlive()) {
             Thread.sleep(StaticSpeed);
@@ -62,10 +67,20 @@ public class BoulderDashController implements IBoulderDashController, IOrderPerf
         System.exit(0);
     }
 
+	/**
+	 * Gets the view.
+	 *
+	 * @return the view
+	 */
 	private IBoulderDashView getView() {
 		return this.view;
 	}
 
+	/**
+	 * Gets the model.
+	 *
+	 * @return the model
+	 */
 	private IBoulderDashModel getModel() {
 		return this.model;
 	}
@@ -99,11 +114,8 @@ public class BoulderDashController implements IBoulderDashController, IOrderPerf
     /**
      * Instantiates a new boulder dash controller.
      *
-     * @param view
-     *            the view
-     * @param model
-     *            the model
-     * @return 
+     * @param model            the model
+     * @param view            the view
      */
 	public BoulderDashController(IBoulderDashModel model, IBoulderDashView view) {
         this.setModel(model);
@@ -112,29 +124,36 @@ public class BoulderDashController implements IBoulderDashController, IOrderPerf
 	}
 
 	/**
-	 * 
-	 * @param view
+	 * Sets the view.
+	 *
+	 * @param view the new view
 	 */
 	private void setView(IBoulderDashView view) {
 		this.view = view;
 	}
 
 	/**
-	 * 
-	 * @param model
+	 * Sets the model.
+	 *
+	 * @param model the new model
 	 */
 	private void setModel(IBoulderDashModel model) {
 		this.model = model;
 	}
 
 
+    /**
+     * @see controller.IBoulderDashController#getOrderPeformer()
+     */
     public IOrderPerformer getOrderPeformer() {
         return this;
     }
 
 	/**
-	 * 
-	 * @param userOrder
+	 * Order perform.
+	 *
+	 * @param userOrder the user order
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 
     public final void orderPerform(final UserOrder userOrder) throws IOException {

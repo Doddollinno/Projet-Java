@@ -7,9 +7,9 @@ import model.Element.Permeability;
 import model.Element.Sprite;
 
 /**
- * An element is an object that can be used on an IBoard
- * @author Paul Combaldieu
+ * An element is an object that can be used on an IBoard.
  *
+ * @author Paul Combaldieu
  */
 public abstract class Element implements IElement {
 
@@ -34,6 +34,8 @@ public abstract class Element implements IElement {
 
 	/**
 	 * Getter for the sprite.
+	 *
+	 * @return the sprite
 	 * @see sprite
 	 */
 	@Override
@@ -52,7 +54,9 @@ public abstract class Element implements IElement {
 	}
 
 	/**
-	 * Getter for the permeability
+	 * Getter for the permeability.
+	 *
+	 * @return the permeability
 	 * @see Permeability
 	 */
 	@Override
@@ -72,6 +76,8 @@ public abstract class Element implements IElement {
 
 	/**
 	 * Getter for the image.
+	 *
+	 * @return the image
 	 * @see java.awt.Image
 	 */
 	@Override

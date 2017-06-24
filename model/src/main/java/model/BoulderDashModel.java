@@ -13,6 +13,10 @@ import model.IModel;
 
 import model.Map;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BoulderDashModel.
+ */
 public class BoulderDashModel implements IBoulderDashModel {
 
 	/** The map. */
@@ -23,10 +27,10 @@ public class BoulderDashModel implements IBoulderDashModel {
 
 	/**
 	 * Instantiates a new model facade.
-	 * @return 
-	 * 
-	 * @throws SQLException
-	 * @throws IOException
+	 *
+	 * @param mapID the map ID
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public BoulderDashModel(final int mapID) throws SQLException, IOException {
 		super();
@@ -34,23 +38,37 @@ public class BoulderDashModel implements IBoulderDashModel {
 		this.myCharacter = new MyCharacter(1, 1, this.getMap());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.IModel#getExampleById(int)
+	/**
+	 *  (non-Javadoc).
+	 *
+	 * @return the map
+	 * @see model.IBoulderDashModel#getMap()
 	 */
 	public IMap getMap() {
 		return (IMap) this.map;
 	}
 
+	/**
+	 * Sets the map.
+	 *
+	 * @param newMap the new map
+	 */
 	public void setMap(final Map newMap) {
 		this.map = newMap;
 	}
 
+	/**
+	 * Sets the my character.
+	 *
+	 * @param newChara the new my character
+	 */
 	private void setMyCharacter(final MyCharacter newChara) {
 		this.myCharacter = newChara;
 	}
 
+/**
+ * Move pawns.
+ */
 public void movePawns() {
 		ArrayList<IMobile> copyPawns = new ArrayList<>(this.getMap().getPawns());
 		
@@ -62,6 +80,9 @@ public void movePawns() {
 			this.getMyCharacter().die();
 	}
 
+	/** (non-Javadoc)
+	 * @see model.IBoulderDashModel#getMyCharacter()
+	 */
 	public MyCharacter getMyCharacter() {
 		return this.myCharacter;
 	}

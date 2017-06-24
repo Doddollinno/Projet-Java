@@ -3,6 +3,10 @@ package model.Element.Motionless;
 import model.Element.Permeability;
 import model.Element.Sprite;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Wall.
+ */
 public class Wall extends MotionlessElement {
 
     /** The Constant SPRITE. */

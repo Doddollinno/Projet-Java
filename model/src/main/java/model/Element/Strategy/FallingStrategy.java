@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package model.Element.Strategy;
 
 import controller.IStrategy;
@@ -10,9 +13,16 @@ import model.Element.Permeability;
 
 
 	
+	// TODO: Auto-generated Javadoc
+/**
+	 * The Class FallingStrategy.
+	 */
 	public abstract class FallingStrategy implements IStrategy {
 
 
+		/* (non-Javadoc)
+		 * @see controller.IStrategy#followStrategy(model.IMobile, model.IMap)
+		 */
 		@Override
 		public void followStrategy(IMobile currentPawn, IMap map) {
 			if (currentPawn.canMoveTo(UserOrder.DOWN)) {

@@ -14,6 +14,13 @@ import view.BoulderDashView;
  */
 public abstract class Main {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws SQLException the SQL exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(final String[] args) throws SQLException, IOException {
 
 		final BoulderDashModel model = new BoulderDashModel(3);
