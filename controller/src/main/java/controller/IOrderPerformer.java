@@ -10,10 +10,9 @@ import java.io.IOException;
  * @version 0.1
  */
 public interface IOrderPerformer {
-<<<<<<< HEAD
-	
-}
-=======
+
+
+
 
     /**
      * Order perform.
@@ -23,7 +22,11 @@ public interface IOrderPerformer {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    void orderPerform(UserOrder userOrder) throws IOException;
-
+    void orderPerform(UserOrder userOrder) throws IOException ;{
+    	
+    }
 }
->>>>>>> refs/remotes/origin/Loadren
+    
+
+
+

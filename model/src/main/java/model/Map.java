@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 
+
 import java.awt.Point;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import model.IElement;
 import model.IMap;
 import model.Element.Permeability;
 import java.util.Observable;
-import contract.model.IMobile;
+import model.IMobile;
 
 public class Map {
 	
@@ -79,8 +80,7 @@ public class Map {
 		this.onTheMap[x][y] = element;
 	}
 
-	public void setMobile
-	hasChanged() {
+	public void setMobilehasChanged() {
 		   this.setChanged();
 	       this.notifyObservers();
 	}

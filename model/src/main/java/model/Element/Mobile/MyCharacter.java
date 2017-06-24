@@ -2,7 +2,7 @@ package model.Element.Mobile;
 
 import java.io.IOException;
 
-import fr.exia.insanevehicles.model.element.Sprite;
+import model.Element.Sprite;
 import model.IMap;
 import model.Element.Permeability;
 
@@ -66,7 +66,7 @@ public abstract class MyCharacter extends Mobile {
         this.setSprite(spriteTurnRight);
 	}
 
-	protected void die() {
+	public void die() {
 		super.die();
         this.setSprite(spriteDeath);
 	}

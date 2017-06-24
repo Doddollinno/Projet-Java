@@ -1,6 +1,16 @@
-import model.Element.Mobile.MyCharacter;
+package model;
 
+import model.Element.Sprite;
+import model.Element.Mobile.MyCharacter;
+import model.dao.MapDAO;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import model.IMap;
+import model.IModel;
+import model.Element.Sprite;
+import model.dao.MapDAO;
+import model.Element.Mobile.MyCharacter;
 
 import model.Map;
 
@@ -19,7 +29,7 @@ public abstract class BoulderDashModel implements IModel {
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	public void ModelFacade(final int mapID) throws SQLException, IOException {
+	public void BoulderDashModel(final int mapID) throws SQLException, IOException {
 		super();
 		Sprite.loadBuffers();
 		this.setMap(MapDAO.getMapById(mapID));
@@ -32,7 +42,7 @@ public abstract class BoulderDashModel implements IModel {
 	 * @see model.IModel#getExampleById(int)
 	 */
 	public IMap getMap() {
-		return this.map;
+		return (IMap) this.map;
 	}
 
 	public void setMap(final Map newMap) {
@@ -43,10 +53,7 @@ public abstract class BoulderDashModel implements IModel {
 		this.myCharacter = newChara;
 	}
 
-	/**
-	 * Moves pawns (boulders, diamonds, ...).
-	 * Their movement is related to their strategy.
-	 */
+@Override
 	public void movePawns() {
 		ArrayList<IMobile> copyPawns = new ArrayList<>(this.getMap().getPawns());
 		
@@ -58,7 +65,7 @@ public abstract class BoulderDashModel implements IModel {
 			this.getMyCharacter().die();
 	}
 
-	@Override
 	public MyCharacter getMyCharacter() {
 		return this.myCharacter;
 	}
+}

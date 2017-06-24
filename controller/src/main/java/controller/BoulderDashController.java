@@ -1,9 +1,8 @@
 package controller;
-<<<<<<< HEAD
-import contract.IBoulderDashView;
-import main.*;
-import Model.IBoulderDashModel;
-=======
+import view.IBoulderDashView;
+import model.IBoulderDashModel;
+import controller.IBoulderDashController;
+
 
 import java.io.IOException;
 
