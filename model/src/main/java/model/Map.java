@@ -53,6 +53,13 @@ public class Map extends Observable{
 
 	
 
+	public Map(int width2, int height2) {
+		this.width = newWidth;
+	    this.height = newHeight;
+	}
+
+
+
 	public int getWidth() {
 		return this.width;
 	}

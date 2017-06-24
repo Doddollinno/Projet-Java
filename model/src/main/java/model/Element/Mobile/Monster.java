@@ -1,27 +1,26 @@
 package model.Element.Mobile;
 
+import java.io.IOException;
+
 import com.sun.javafx.geom.Rectangle;
 
+import controller.IStrategy;
+import controller.UserOrder;
 import model.IMap;
 import model.Element.Permeability;
 import model.Element.Sprite;
+import model.Element.Strategy.MonsterStrategy;
 
 public abstract class Monster extends Mobile {
 	
 	
-	private static final IStrategy randomStrategy = new RandomMonsterStrategy();
+	private static final IStrategy randomStrategy = new MonsterStrategy();
 	
-	/** The static constant followWallClockWiseStrategy */
-	private static final IStrategy followWallClockWiseStrategy = new FollowWallClockWiseStrategy();
-	
-	/** The static constant followWallAntiClockWiseStrategy */
-	private static final IStrategy followWallAntiClockWiseStrategy = new FollowWallAntiClockWiseStrategy();
-	
-	/** The static constant noStrategy */
-	private static final IStrategy noStrategy = new NoStrategy();
+	private static Sprite sprite = new Sprite('M',"74359_10.png");
+	private static Sprite spriteExplode = new Sprite('M',"74359_46.png");
 	
 	/** The strategy in use by this monster */
-	private IStrategy myStrategy = null;
+	private IStrategy myStrategy = randomStrategy;
 	
 	/** The last wall touched by this monster */
 	private UserOrder lastWallTouched = UserOrder.NOP;
@@ -31,25 +30,66 @@ public abstract class Monster extends Mobile {
 	}
 
 	/**
-	 * 
+	 * Instantiates a new monster.
+	 *
 	 * @param x
+	 *            the x
 	 * @param y
-	 * @param Map
+	 *            the y
+	 * @param map
+	 *            the map
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
+	public Monster(final int x, final int y, final IMap map) throws IOException {
+		super(x, y, sprite, map, Permeability.BLOCKING);
+		getSprite().loadImage();
+		this.myStrategy = Monster.randomStrategy;
+	}
 
+	@Override
+	public final void moveLeft() {
+		super.moveLeft();
+	}
 
-	public void Movepatern(){
-		super();
+	@Override
+	public final void moveRight() {
+		super.moveRight();
+	}
+
+	@Override
+	public final void moveUp() {
+		super.moveUp();
+	}
+
+	@Override
+	public final void moveDown() {
+		super.moveDown();
 	}
 
 	protected void die() {
 		super.die();
-        this.setSprite(spriteExplode);
+		this.setSprite(spriteExplode);
 	}
 
 	public void doNothing() {
 		super.doNothing();
         this.setSprite(sprite);
+	}
+
+	@Override
+	public void followMyStrategy() {
+		this.myStrategy.followStrategy(this, this.getMap());
+	}
+	
+	@Override
+	public UserOrder getLastWallTouched() {
+		return this.lastWallTouched;
+	}
+
+	@Override
+	public void setLastWallTouched(final UserOrder userOrder) {
+		this.lastWallTouched = userOrder;
 	}
 
 }

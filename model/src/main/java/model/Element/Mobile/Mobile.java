@@ -6,16 +6,13 @@ import java.io.IOException;
 
 import controller.UserOrder;
 import fr.exia.showboard.IBoard;
-import model.IElement;
 import model.IMap;
 import model.IMobile;
 import model.Element.Element;
 import model.Element.Permeability;
 import model.Element.Sprite;
-import model.Element.Motionless.MotionlessElement;
-import model.IMobile.*;
-import model.Element.Mobile.Monster;
-import model.IMap;
+import model.Element.ElementFactory.ElementFactory;
+
 
 
 
@@ -102,7 +99,7 @@ public abstract class Mobile extends Element implements IMobile {
 
 
 		public void dugDirt() throws IOException {
-			this.getMap().setOnTheMapXY(this.getX(), this.getY(), MotionlessElement.createDugDirt());
+			this.getMap().setOnTheMapXY(this.getX(), this.getY(), ElementFactory.createDugDirt());
 			this.getMap().getOnTheMapXY(getX(), getY()).getSprite().loadImage();
 		}
 
@@ -237,6 +234,18 @@ public abstract class Mobile extends Element implements IMobile {
 		public void removeFromBoard() {
 			this.setPosition(new Point(1, -1));
 			this.getMap().getPawns().remove(this);
+		}
+
+
+		@Override
+		public UserOrder getLastWallTouched() {
+			// nop
+			return UserOrder.NOP;
+		}
+
+		@Override
+		public void setLastWallTouched(final UserOrder userOrder) {
+			// nop
 		}
 
 }

@@ -8,6 +8,6 @@ public class BoulderStrategy extends FallingStrategy implements IStrategy
 		@Override
 		public void followStrategy(IMobile currentPawn, IMap map)
 		{
-			followStrategy(currentPawn, map);
+			super.followStrategy(currentPawn, map);
 		}
 	}

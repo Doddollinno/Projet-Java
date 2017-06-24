@@ -1,5 +1,7 @@
 package model.Element.Motionless;
 
+import java.awt.Image;
+
 import model.Element.Permeability;
 import model.Element.Sprite;
 
@@ -11,7 +13,7 @@ public class Dirt extends MotionlessElement {
                                                                                                        /**é
      * Instantiates a new ditch.
      */
-    Dirt() {
+    public Dirt() {
     	super(SPRITE, Permeability.MINEABLE);
     }
 }

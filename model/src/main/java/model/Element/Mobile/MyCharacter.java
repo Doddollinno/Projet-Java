@@ -6,7 +6,7 @@ import model.Element.Sprite;
 import model.IMap;
 import model.Element.Permeability;
 
-public abstract class MyCharacter extends Mobile {
+public class MyCharacter extends Mobile {
 	
 	
 	private int diamonds;
@@ -76,6 +76,18 @@ public abstract class MyCharacter extends Mobile {
 	public void doNothing() {
 		super.doNothing();
         this.setSprite(sprite);
+	}
+
+	@Override
+	public Boolean IsDead() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void followMyStrategy() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -5,11 +5,9 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.IElement;
 import model.Map;
-import model.Element.Mobile.Rock;
-import model.Element.IElement;
-import model.Element.Mobile.Diamond;
-import model.Element.Mobile.Monster;
+import model.Element.ElementFactory.ElementFactory;
 
 /**
  * <h1>The Class MapDAO.</h1>
@@ -21,9 +19,6 @@ public abstract class MapDAO extends AbstractDAO {
 
 	/** The sql map by id. */
 	private static String sqlMapById = "{call getMapByID(?)}";
-
-	/** The id column index. */
-	// private static int idColumnIndex = 1;
 
 	/** The width column index. */
 	private static int widthColumnIndex = 2;
@@ -63,7 +58,7 @@ public abstract class MapDAO extends AbstractDAO {
 					System.out.println(e.getMessage());
 					System.exit(0);
 				}
-				tempMap = new Map();
+				tempMap = new Map(width, height, new IElement[width][height]);
 
 				MapDAO.placePawnsOnMap(result, tempMap, width);
 			} else {
@@ -88,14 +83,12 @@ public abstract class MapDAO extends AbstractDAO {
 
 		for (char c : result.getString(mapColumnIndex).toCharArray()) {
 			if (!skipNext) {
-				// Adding map element, if pawn, adding dug dirt
 				tempMap.setOnTheMapXY(currentXToWrite, currentYToWrite, ElementFactory.getFromFileSymbol(c));
 
-				// Now let's check if the element to insert is an IMobile
-				// (boulder, diamond..)
+				
 				if (c == 'O')
 					tempMap.addPawn(new Boulder(currentXToWrite, currentYToWrite, tempMap));
-				else if (c == 'D') {
+				else if (c == 'V') {
 					tempMap.addPawn(new Diamond(currentXToWrite, currentYToWrite, tempMap));
 					tempMap.addDiamondCount();
 				} else if (c == 'M') {
@@ -106,7 +99,6 @@ public abstract class MapDAO extends AbstractDAO {
 			} else {
 				skipNext = false;
 			}
-			// If we get to the carriage return character
 			if (currentXToWrite % width == 0 && currentXToWrite != 0) {
 				currentXToWrite = 0;
 				currentYToWrite++;

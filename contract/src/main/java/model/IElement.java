@@ -2,17 +2,35 @@ package model;
 
 import java.awt.Image;
 
+import fr.exia.showboard.ISquare;
 import model.Element.Permeability;
 import model.Element.Sprite;
 
-public interface IElement {
+/**
+ * The interface that represents elements on the board.
+ * @author Paul Combaldieu 
+ *
+ */
+public interface IElement extends ISquare {
 
-	Sprite getSprite();
+    /**
+     * Gets the sprite.
+     *
+     * @return the sprite
+     */
+    Sprite getSprite();
 
-	Permeability getPermeability();
+    /**
+     * Gets the permeability.
+     *
+     * @return the permeability
+     */
+    Permeability getPermeability();
 
-	Image getImage();
-
-
+    /*
+     * (non-Javadoc)
+     */
+    @Override
+    Image getImage();
 
 }

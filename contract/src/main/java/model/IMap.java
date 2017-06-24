@@ -2,7 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Observable;
+
+import model.Element.Element;
 import model.Element.Permeability;
+import model.Element.Motionless.MotionlessElement;
 
 public interface IMap {		  
 
@@ -15,7 +18,7 @@ public interface IMap {
 			public IElement getOnTheMapXY(int x, int y);
 			
 
-			public void setOnTheMapXY(int x, int y, IElement elem);
+			public void setOnTheMapXY(int x, int y, Element element);
 			
 
 			public void setMobileHasChanged();

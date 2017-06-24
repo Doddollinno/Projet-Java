@@ -11,7 +11,6 @@ public class MonsterStrategy implements IStrategy {
 	public void followStrategy(IMobile currentPawn, IMap map) {
 		if(currentPawn.isCrushed()) {
 			Monster monster = (Monster)(currentPawn);
-			monster.removeStrategy();
 			monster.removeFromBoard();
 		}
 	}

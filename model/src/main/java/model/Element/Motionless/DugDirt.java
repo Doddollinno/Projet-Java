@@ -13,7 +13,7 @@ public class DugDirt extends MotionlessElement  {
     /**
      * Instantiates a new ditch.
      */
-    DugDirt() {
+    public DugDirt() {
     	super(SPRITE, Permeability.PENETRABLE);
     }
 }
