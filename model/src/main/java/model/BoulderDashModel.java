@@ -29,7 +29,7 @@ public abstract class BoulderDashModel implements IModel {
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	public void BoulderDashModel(final int mapID) throws SQLException, IOException {
+	public BoulderDashModel(final int mapID) throws SQLException, IOException {
 		super();
 		Sprite.loadBuffers();
 		this.setMap(MapDAO.getMapById(mapID));

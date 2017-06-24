@@ -7,24 +7,27 @@ import model.IMap;
 import model.Element.Permeability;
 
 public abstract class MyCharacter extends Mobile {
+	
+	
+	private int diamonds;
 
 	/** The Constant SPRITE. */
-    private static final Sprite sprite          = new Sprite('H', "MyCharacter.png");
+    private static final Sprite sprite          = new Sprite('H', "74336_04.png");
 
     /** The Constant spriteTurnLeft. */
-    private static final Sprite spriteTurnLeft  = new Sprite('H', "MyCharacterLeft.png");
+    private static final Sprite spriteTurnLeft  = new Sprite('H', "74336_08.png");
 
     /** The Constant spriteTurnRight. */
-    private static final Sprite spriteTurnRight = new Sprite('H', "MyCharacterRight.png");
+    private static final Sprite spriteTurnRight = new Sprite('H', "74336_19.png");
     
     /** The Constant spriteTurnLeft. */
-    private static final Sprite spriteTurnUp  = new Sprite('H', "MyCharacterUp.png");
+    private static final Sprite spriteTurnUp  = new Sprite('H', "74336_11.png");
 
     /** The Constant spriteTurnRight. */
-    private static final Sprite spriteTurnDown = new Sprite('H', "MyCharacterDown.png");
+    private static final Sprite spriteTurnDown = new Sprite('H', "74336_12.png");
 
     /** The Constant spriteExplode. */
-    private static final Sprite spriteDeath   = new Sprite('H', "MyCharacterExplode.png");
+    private static final Sprite spriteDeath   = new Sprite('H', "74336_05.png");
 	
 	
 	/**
@@ -34,16 +37,15 @@ public abstract class MyCharacter extends Mobile {
 	 * @param Map
 	 */
 	
-	private int Diamonds;
-	public MyCharacter(final int x, final int y, final IMap Map)   {
-		super(x, Map, y, sprite, Permeability.BLOCKING);
+	public MyCharacter(final int x, final int y, final IMap Map) throws IOException   {
+		super(x, y, sprite, Map, Permeability.BLOCKING);
 		spriteTurnLeft.loadImage();
         spriteTurnRight.loadImage();
         spriteTurnDown.loadImage();
         spriteTurnUp.loadImage();
         spriteDeath.loadImage();
         
-        this.Diamonds = 0;
+        this.diamonds = 0;
 	}
 	
 	public void moveDown() {

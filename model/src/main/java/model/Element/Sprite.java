@@ -1,6 +1,7 @@
 package model.Element;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,16 +10,24 @@ import javax.imageio.ImageIO;
 public class Sprite {
 
 
-    private Image   image;
+	/** The image. */
+	private Image image;
+	
+	/** The image name */
+	private String imageName;
 
+	/** The console image. */
+	private char consoleImage;
 
-    private String  imageName;
+	/** The is image loaded. */
+	private boolean imageLoaded;
 
+	/** The buffer for the character images */
+	public static BufferedImage characterTileSet = null;
 
-    private char    consoleImage;
+	/** The buffer for the map images */
+	public static BufferedImage mapTileSet = null;
 
-
-    private boolean imageLoaded;
 
 
     public Sprite(final char character, final String imageName) {
@@ -74,5 +83,35 @@ public class Sprite {
     public final void setImageLoaded(final boolean isImageLoaded) {
         this.imageLoaded = isImageLoaded;
     }
+
+
+    /**
+	 * Loads the buffers for the characters and the map
+	 */
+	public static void loadBuffers() {
+		try {
+			int randomNum = (int) (Math.random() * 6);
+			Sprite.characterTileSet = ImageIO.read(new File("images/characterSet.png"));
+			Sprite.mapTileSet = ImageIO.read(new File("images/mapSet.png"));
+			Sprite.mapTileSet = Sprite.cropBuffer(Sprite.mapTileSet, randomNum);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			System.out.println("Working directory: " + System.getProperty("user.dir"));
+		}
+	}
+
+
+	private  static BufferedImage cropBuffer(final BufferedImage src, final int offset) {
+		BufferedImage img = new BufferedImage(16 * 11, 16 * 4, BufferedImage.TYPE_INT_RGB);
+
+		for (int currentXToWrite = 0; currentXToWrite < 16 * 11; currentXToWrite++) {
+			for (int currentYToWrite = 0, currentYToRead = offset * 16 * 4; currentYToWrite < 16 * 4; currentYToWrite++, currentYToRead++) {
+				int color = src.getRGB(currentXToWrite, currentYToRead);
+				img.setRGB(currentXToWrite, currentYToWrite, color);
+			}
+		}
+		return img;
+	}
 
 }

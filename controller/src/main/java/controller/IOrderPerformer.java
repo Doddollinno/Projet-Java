@@ -22,9 +22,7 @@ public interface IOrderPerformer {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    void orderPerform(UserOrder userOrder) throws IOException ;{
-    	
-    }
+    void orderPerform(UserOrder userOrder) throws IOException;
 }
     
 

@@ -14,7 +14,7 @@ import model.Element.Permeability;
 import java.util.Observable;
 import model.IMobile;
 
-public class Map {
+public class Map extends Observable{
 	
 	/** The width. */
 	private int width;
@@ -27,6 +27,12 @@ public class Map {
 	
 	/** The Pawn list */
 	private ArrayList<IMobile> pawns;
+	
+	/** The myCharacter */
+	  private IMobile myCharacter = null;
+	  
+	  /** The diamond count */
+	  private int diamondCount = 0;
 
 	 /**
      * Instantiates a new road with the content of the file fileName.
@@ -36,6 +42,14 @@ public class Map {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
+	  
+	  public Map(final int newWidth, final int newHeight, final IElement[][] newMap) throws SQLException {
+		    super();
+		    this.onTheMap = newMap;
+		    this.width = newWidth;
+		    this.height = newHeight;
+		    this.pawns = new ArrayList<IMobile>();
+		  }
 
 	
 
@@ -94,10 +108,21 @@ public class Map {
 		return this.pawns;
 		
 	}
-	  public Permeability getSquareIsOccupiedXY(final int x, final int y) {
+	
+	  public IMobile getMyCharacter() {
+	    return this.myCharacter;
+	  }
+	
+	 public Permeability getSquareIsOccupiedXY(final int x, final int y) {
 		    Point point = new Point(x, y);
 		    for(IMobile pawn : this.getPawns()) {
 		      if (pawn.getPosition().equals(point))
 		        return pawn.getPermeability();
 		    }
+		    
+		    if(this.getMyCharacter().getPosition().equals(point))
+		    	return this.getMyCharacter().getPermeability();
+		    
+		    return this.getOnTheMapXY(x, y).getPermeability();
+		  }
 }

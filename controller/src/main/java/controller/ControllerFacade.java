@@ -37,9 +37,7 @@ public class ControllerFacade implements IController {
 
     /**
      * Start.
-     *
-     * @throws SQLException
-     *             the SQL exception
+     * @throws SQLException 
      */
     public void start() throws SQLException {
         this.getView().displayMessage(this.getModel().getExampleById(1).toString());
@@ -73,4 +71,10 @@ public class ControllerFacade implements IController {
     public IModel getModel() {
         return this.model;
     }
+
+	@Override
+	public IOrderPerformer getOrderPeformer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

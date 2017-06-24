@@ -3,7 +3,6 @@ import view.IBoulderDashView;
 import model.IBoulderDashModel;
 import controller.IBoulderDashController;
 
-
 import java.io.IOException;
 
 /**
@@ -81,6 +80,16 @@ public abstract class BoulderDashController implements IBoulderDashController, I
      */
     private void clearStackOrder() {
         this.stackOrder = UserOrder.NOP;
+    }
+    
+    /**
+     * Sets the stack order.
+     *
+     * @param stackOrder
+     *            the new stack order
+     */
+    private void setStackOrder(final UserOrder stackOrder) {
+        this.stackOrder = stackOrder;
     }
 
     /**

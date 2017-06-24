@@ -35,6 +35,8 @@ public abstract class Mobile extends Element implements IMobile {
 
 
 		private boolean fallSpeed = false;
+		
+
 
 
 		Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
