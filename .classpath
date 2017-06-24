@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="boulderdash/contract/src/main/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" output="target/test-classes" path="boulderdash/contract/src/test/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="boulderdash/controller/src/main/java"/>
-	<classpathentry kind="src" path="boulderdash/main/src/main/java"/>
-	<classpathentry kind="src" path="boulderdash/model/src/main/java"/>
-	<classpathentry kind="src" path="boulderdash/view/src/main/java"/>
 	<classpathentry kind="src" path="contract/src/main/java"/>
-	<classpathentry kind="src" path="contract/src/test/java"/>
 	<classpathentry kind="src" path="controller/src/main/java"/>
 	<classpathentry kind="src" path="main/src/main/java"/>
 	<classpathentry kind="src" path="model/src/main/java"/>
