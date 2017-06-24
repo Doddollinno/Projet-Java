@@ -53,7 +53,7 @@ public class Map extends Observable{
 
 	
 
-	public Map(int width2, int height2) {
+	public Map(int newWidth, int newHeight) {
 		this.width = newWidth;
 	    this.height = newHeight;
 	}
