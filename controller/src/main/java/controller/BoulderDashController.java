@@ -27,8 +27,7 @@ public class BoulderDashController implements IBoulderDashController, IOrderPerf
 	/** The stack order. */
     private UserOrder stackOrder = UserOrder.NOP;
 
-	@Override
-    public final void play() throws InterruptedException {
+	public final void play() throws InterruptedException {
         while (this.getModel().getMyCharacter().isAlive()) {
             Thread.sleep(StaticSpeed);
             switch (this.getStackOrder()) {
@@ -128,7 +127,7 @@ public class BoulderDashController implements IBoulderDashController, IOrderPerf
 		this.model = model;
 	}
 
-	@Override
+
     public IOrderPerformer getOrderPeformer() {
         return this;
     }
@@ -137,7 +136,7 @@ public class BoulderDashController implements IBoulderDashController, IOrderPerf
 	 * 
 	 * @param userOrder
 	 */
-	@Override
+
     public final void orderPerform(final UserOrder userOrder) throws IOException {
         this.setStackOrder(userOrder);
     }

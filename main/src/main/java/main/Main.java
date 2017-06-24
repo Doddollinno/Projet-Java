@@ -2,9 +2,6 @@ package main;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
-
 import controller.BoulderDashController;
 import model.BoulderDashModel;
 import view.BoulderDashView;

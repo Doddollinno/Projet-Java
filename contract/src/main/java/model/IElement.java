@@ -30,7 +30,6 @@ public interface IElement extends ISquare {
     /*
      * (non-Javadoc)
      */
-    @Override
     Image getImage();
 
 }
