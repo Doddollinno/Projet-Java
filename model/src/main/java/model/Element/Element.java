@@ -6,11 +6,7 @@ import model.IElement;
 import model.Element.Permeability;
 import model.Element.Sprite;
 
-/**
- * An element is an object that can be used on an IBoard
- * @author Paul Combaldieu
- *
- */
+
 public abstract class Element implements IElement {
 
 	/** The sprite. */
