@@ -1,0 +1,10 @@
+controller
+main
+model
+model.Element
+model.Element.ElementFactory
+model.Element.Mobile
+model.Element.Motionless
+model.Element.Strategy
+model.dao
+view
